@@ -8,9 +8,9 @@ package systemAccount.Model;
  *
  * @author Ricky
  */
-public interface Account extends Model {
+public interface Account {
     public boolean login(String password )throws Exception;
-    public boolean register(String password);
-    public void edit_info();
+    public boolean register(String password) throws Exception;
+    public void edit_info() throws Exception;
     public boolean reset_password(String email,String password);
 }

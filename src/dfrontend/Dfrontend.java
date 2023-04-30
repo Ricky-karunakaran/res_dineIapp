@@ -4,6 +4,7 @@
  */
 package dfrontend;
 
+import com.utils.SceneChanger;
 import com.utils.WindowSize;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,13 +13,18 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Dfrontend extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("applicationView.fxml"));
-        
+//        String mode = "Admin";
+        String mode = "Restaurant";
+        Parent root;
+        if(mode.equals("Admin")){root = FXMLLoader.load(getClass().getResource("adminApplicationView.fxml")); }
+        else {root = FXMLLoader.load(getClass().getResource("applicationView.fxml"));}
+        SceneChanger sceneChanger = SceneChanger.getInstance();
+        sceneChanger.createRouteHistory();
         Scene scene = new Scene(root,WindowSize.getScreenWidth(),WindowSize.getScreenHeight());
-        
+
         stage.setScene(scene);
         stage.show();
     }
@@ -29,5 +35,5 @@ public class Dfrontend extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

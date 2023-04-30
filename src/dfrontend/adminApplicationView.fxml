@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="mainContainer" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('background.jpg'); -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dfrontend.ApplicationViewController">
+<AnchorPane fx:id="mainContainer" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('background.jpg'); -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dfrontend.ApplicationViewController">
    <children>
       <ImageView fx:id="backGround" fitHeight="400.0" fitWidth="600.0" opacity="0.4" pickOnBounds="true">
          <image>
@@ -46,12 +46,7 @@
                   </Text>
                   <VBox alignment="CENTER" spacing="20.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="190.0" style="-fx-background-color: Black;" text="Login" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="registerButton" alignment="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="190.0" style="-fx-background-color: Black;" text="Sign Up" textFill="WHITE">
+                        <Button fx:id="adminLoginButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="190.0" style="-fx-background-color: Black;" text="Login" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
                            </font>

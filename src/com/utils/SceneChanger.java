@@ -16,33 +16,51 @@ import javafx.stage.Stage;
  * @author Ricky
  */
 public class SceneChanger {
-    private static Stack<String> stackScene = new Stack<>();
+    private static SceneChanger instance; 
+    private  RouteHistory routeHistory;
+    private SceneChanger(){};
+    public static SceneChanger getInstance(){
+        if(instance == null) {
+            instance = new SceneChanger();
+        }
+        return instance;
+    }
+
+    public void createRouteHistory(){
+        routeHistory = new RouteHistory(){};
+    }
+
+    public RouteHistory getRouteHistory(){
+        return routeHistory;
+    }
+   
     public static void changeScene(Stage currentStage,String fxmlFile) throws IOException{
         Parent root = FXMLLoader.load(SceneChanger.class.getResource(fxmlFile));
-        SceneChanger.addScene(fxmlFile);
+        
+        SceneChanger.getInstance().addScene(fxmlFile);
         Scene scene = new Scene(root,WindowSize.getScreenWidth(),WindowSize.getScreenHeight());
+        currentStage.setTitle("FoodVerse");
         currentStage.setScene(scene);
         currentStage.show();
         
     }
     
-    public static void addScene(String fxmlFile){
-        SceneChanger.stackScene.push(fxmlFile);
+    public void addScene(String fxmlFile){
+        SceneChanger.getInstance().getRouteHistory().push(fxmlFile);
     }
-    public static void backToPrevious(Stage currentStage) throws IOException{
-        String fxmlFile = SceneChanger.backScene();
-        Parent root = FXMLLoader.load(SceneChanger.class.getResource(fxmlFile));
-        SceneChanger.addScene(fxmlFile);
-        Scene scene = new Scene(root,WindowSize.getScreenWidth(),WindowSize.getScreenHeight());
-        currentStage.setScene(scene);
-        currentStage.show();
-    }
-    public static String backScene(){
-        return SceneChanger.stackScene.pop();
-    }
+//    public static void backToPrevious(Stage currentStage) throws IOException{
+//        String fxmlFile = SceneChanger.backScene();
+//        Parent root = FXMLLoader.load(SceneChanger.class.getResource(fxmlFile));
+//        SceneChanger.addScene(fxmlFile);
+//        Scene scene = new Scene(root,WindowSize.getScreenWidth(),WindowSize.getScreenHeight());
+//        currentStage.setScene(scene);
+//        currentStage.show();
+//    }
+//    public static String backScene(){
+//        return SceneChanger.stackScene.pop();
+//    }
     
     public static void getHistory(){
-        System.out.println(SceneChanger.stackScene.size());
-        System.out.println(SceneChanger.stackScene.toString());
+        System.out.println(getInstance().routeHistory.toString());
     }
 }
