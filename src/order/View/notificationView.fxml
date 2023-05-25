@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="systemAccount.Controller.SystemAccountController">
-   <top>
+<BorderPane id="main_container" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="order.Controller.WaiterCallController">
+    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="600.0" BorderPane.alignment="CENTER_LEFT">
          <children>
             <GridPane>
@@ -33,16 +36,8 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Call List" GridPane.columnIndex="3" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Feedback" GridPane.columnIndex="4" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Report" GridPane.columnIndex="5" />
-                  <HBox fx:id="menuMenuItem" alignment="CENTER" GridPane.columnIndex="6">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" />
-                     </children>
-                  </HBox>
-                  <HBox fx:id="accountMenuItem" alignment="CENTER" GridPane.columnIndex="7">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Setting" />
-                     </children>
-                  </HBox>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" GridPane.columnIndex="6" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Setting" GridPane.columnIndex="7" />
                </children>
             </GridPane>
          </children>
@@ -52,6 +47,23 @@
       </HBox>
    </top>
    <center>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Restaurant home view" wrappingWidth="181.33672714233398" BorderPane.alignment="CENTER" />
+      <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tableView" editable="true" fixedCellSize="60.0" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="notification_time" prefWidth="146.4000244140625" text="Notification Time" />
+                <TableColumn fx:id="notification_type" minWidth="4.0" prefWidth="78.4000244140625" text="Type" />
+                  <TableColumn fx:id="notification_user_name" prefWidth="75.0" text="User Name" />
+                  <TableColumn fx:id="notification_content" prefWidth="374.4000244140625" text="Content" />
+              </columns>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </VBox>
    </center>
 </BorderPane>

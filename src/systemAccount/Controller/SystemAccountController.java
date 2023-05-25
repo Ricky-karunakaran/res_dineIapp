@@ -8,6 +8,7 @@ import com.utils.SceneChanger;
 import com.utils.Session;
 import com.utils.SessionManager;
 import com.utils.WindowSize;
+import customerAuthentication.Controller.CheckInController;
 import dfrontend.ApplicationViewController;
 import java.io.IOException;
 import java.net.URL;
@@ -56,8 +57,9 @@ public class SystemAccountController implements Initializable{
     @FXML private MenuItem backMenuItem;
     @FXML private ImageView backGround;
     
-    @FXML private HBox accountMenuItem;
-    @FXML private HBox menuMenuItem;
+    @FXML private Text menuMenuItem;
+    @FXML private Text sessionMenuItem;
+    @FXML private Text accountMenuItem;
     
     @FXML
     private void register_restaurant() throws IOException  {
@@ -90,11 +92,7 @@ public class SystemAccountController implements Initializable{
                     SessionManager session = SessionManager.getInstance();
                     session.createSession();
                     session.getSession().setAttributes("restaurant",restaurant);
-                    Parent root = FXMLLoader.load(getClass().getResource("/systemAccount/View/homeView.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage currentStage = (Stage)this.restaurant_password.getScene().getWindow();
-                    currentStage.setScene(scene);
-                    currentStage.show();
+                    SceneChanger.changeScene((Stage)this.mainContainer.getScene().getWindow(), "/customerAuthentication/View/sessionView.fxml");
                 };
                 // restaurant.login(res_password);
                 
@@ -118,7 +116,7 @@ public class SystemAccountController implements Initializable{
         restaurant.setOperationHours(this.restaurant_operation_hours.getText());
         try {
             restaurant.edit_info();
-            SceneChanger.changeScene((Stage) this.mainContainer.getScene().getWindow(), "/systemAccount/View/homeView.fxml");
+            SceneChanger.changeScene((Stage) this.mainContainer.getScene().getWindow(), "/systemAccount/View/editAccountView.fxml");
         } catch (Exception ex) {
             Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -137,11 +135,13 @@ public class SystemAccountController implements Initializable{
             a.setHeaderText("Login Fail");
             a.show();
         } else {
-            SceneChanger.changeScene((Stage)this.mainContainer.getScene().getWindow(), "/systemAccount/View/homeView.fxml");
+            
             SessionManager session = SessionManager.getInstance();
             session.createSession();
             session.getSession().setAttributes("restaurant",restaurant);
+            System.out.println(restaurant);
             SceneChanger.getHistory();
+            SceneChanger.changeScene((Stage)this.mainContainer.getScene().getWindow(), "/customerAuthentication/View/sessionView.fxml");
 //            Parent root = FXMLLoader.load(getClass().getResource("/systemAccount/View/homeView.fxml"));
 //            Scene scene = new Scene(root);
 //            Stage currentStage = (Stage)this.mainContainer.getScene().getWindow();
@@ -262,6 +262,39 @@ public class SystemAccountController implements Initializable{
             });
             
         }
+        this.setupMenuRoute();
         
+    }
+    
+    public void setupMenuRoute(){
+        if(this.menuMenuItem != null ){
+            this.menuMenuItem.setOnMouseClicked(event -> {
+            try{
+                SceneChanger.changeScene((Stage)this.mainContainer.getScene().getWindow(), "/order/View/menuView.fxml");
+            }   catch (IOException ex) {
+                    Logger.getLogger(CheckInController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        }
+        if(this.accountMenuItem != null ){
+            this.accountMenuItem.setOnMouseClicked(event -> {
+            try{
+                SceneChanger.getInstance().getRouteHistory().show();
+                SceneChanger.changeScene((Stage)this.mainContainer.getScene().getWindow(), "/systemAccount/View/editAccountView.fxml");
+            }   catch (IOException ex) {
+                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        }
+        if(this.sessionMenuItem != null ){
+            this.sessionMenuItem.setOnMouseClicked(event -> {
+            try{
+                SceneChanger.getInstance().getRouteHistory().show();
+                SceneChanger.changeScene((Stage)this.mainContainer.getScene().getWindow(), "/customerAuthentication/View/sessionView.fxml");
+            }   catch (IOException ex) {
+                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        }
     }
 }

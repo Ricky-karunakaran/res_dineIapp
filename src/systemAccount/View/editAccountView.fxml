@@ -17,22 +17,38 @@
 
 <BorderPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" styleClass="main-container" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="systemAccount.Controller.SystemAccountController">
 <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="Session" />
-          <Menu mnemonicParsing="false" text="Notification" />
-          <Menu mnemonicParsing="false" text="Check In" />
-            <Menu mnemonicParsing="false" text="Call List" />
-            <Menu mnemonicParsing="false" text="Feedback" />
-            <Menu mnemonicParsing="false" text="Report" />
-            <Menu mnemonicParsing="false" text="Menu" />
-            <Menu mnemonicParsing="false" text="Setting">
-               <items>
-                  <MenuItem  mnemonicParsing="false" text="Account" />
-               </items>
-            </Menu>
-        </menus>
-      </MenuBar>
+      <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="600.0" BorderPane.alignment="CENTER_LEFT">
+         <children>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text fx:id ="sessionMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Session" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notification" GridPane.columnIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Check In" GridPane.columnIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Call List" GridPane.columnIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Feedback" GridPane.columnIndex="4" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Report" GridPane.columnIndex="5" />
+                  <Text fx:id ="menuMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" GridPane.columnIndex="6" />
+                  <Text fx:id ="accountMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Setting" GridPane.columnIndex="7" />
+               </children>
+            </GridPane>
+         </children>
+         <BorderPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </BorderPane.margin>
+      </HBox>
    </top>
    <center>
       <HBox alignment="CENTER" prefHeight="474.0" prefWidth="488.0" style="-fx-border-color: Black;" stylesheets="@../../css/style.css" BorderPane.alignment="CENTER">

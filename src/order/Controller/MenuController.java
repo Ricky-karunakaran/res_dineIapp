@@ -1,18 +1,17 @@
 
 package order.Controller;
 
+import order.Model.Menu;
 import com.utils.DataFetchService;
 import com.utils.SceneChanger;
 import com.utils.Session;
 import com.utils.SessionManager;
+import customerAuthentication.Controller.CheckInController;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Base64;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -23,7 +22,6 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -34,18 +32,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
-import order.Model.Menu;
-import systemAccount.Controller.RestaurantAccountController;
+
+import systemAccount.Controller.SystemAccountController;
 import systemAccount.Model.Restaurant;
 
 /**
@@ -65,6 +60,10 @@ public class MenuController implements Initializable{
     
     @FXML TextField menu_title_input;
     @FXML ScrollPane menu_item_pane;
+    
+    @FXML private Text menuMenuItem;
+    @FXML private Text sessionMenuItem;
+    @FXML private Text accountMenuItem;
     
     private String file_uploaded;
     private String currentView;
@@ -114,6 +113,7 @@ public class MenuController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         String view = location.toString().substring(location.toString().lastIndexOf("/")+1);
         this.currentView=view;
+        this.setupMenuRoute();
         if(view.equals("menuDetailView.fxml")){
             this.initialize_menu_detail();
         }
@@ -328,5 +328,35 @@ public class MenuController implements Initializable{
             returnView = "/order/View/menuView.fxml";
         }
         SceneChanger.changeScene((Stage) this.main_container.getScene().getWindow(), returnView);
+    }
+     
+    public void setupMenuRoute(){
+        if(this.menuMenuItem != null ){
+            this.menuMenuItem.setOnMouseClicked(event -> {
+            try{
+                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/order/View/menuView.fxml");
+            }   catch (IOException ex) {
+                    Logger.getLogger(CheckInController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        }
+        if(this.accountMenuItem != null ){
+            this.accountMenuItem.setOnMouseClicked(event -> {
+            try{
+                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/systemAccount/View/editAccountView.fxml");
+            }   catch (IOException ex) {
+                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        }
+        if(this.sessionMenuItem != null ){
+            this.sessionMenuItem.setOnMouseClicked(event -> {
+            try{
+                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/customerAuthentication/View/sessionView.fxml");
+            }   catch (IOException ex) {
+                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        }
     }
 }

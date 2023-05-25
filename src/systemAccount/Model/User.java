@@ -7,6 +7,7 @@ package systemAccount.Model;
 import com.utils.dbConnection;
 import java.awt.Image;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 /**
@@ -45,6 +46,8 @@ public class User implements Account {
     public void setUserName(String user_name){
         this.user_name = user_name;
     }
+    
+    public void setUserEmail(String user_email){ this.user_email = user_email;}
     
     @Override
     public boolean login(String password) throws Exception {
@@ -94,6 +97,32 @@ public class User implements Account {
     @Override
     public boolean reset_password(String email, String password) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void check_out(String user_active_session){
+         try {
+            Connection con= dbConnection.getDb();
+            String sql = "Update User SET user_active_session = NULL WHERE user_active_session = ? ";
+            PreparedStatement pt=con.prepareCall(sql);
+            System.out.println("user session "+user_active_session);
+            pt.setString(1,user_active_session);
+            pt.execute();
+ 
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public void check_out_by_email(){
+        try {
+            Connection con= dbConnection.getDb();
+            String sql = "Update User SET user_active_session = NULL WHERE user_email = ? ";
+            PreparedStatement pt=con.prepareCall(sql);
+            pt.setString(1,this.user_email);
+            pt.execute();
+        } catch (Exception e){
+            System.out.println(e);
+        }
     }
     
 }

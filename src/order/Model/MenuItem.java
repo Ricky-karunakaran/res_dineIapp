@@ -1,8 +1,6 @@
-
 package order.Model;
 
 import com.utils.dbConnection;
-import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -103,5 +101,10 @@ public class MenuItem {
         }catch(Exception e){
         }
         return menuItems;
+    }
+    
+    @Override
+    public String toString(){
+        return this.menu_item_name+" - "+this.menu_item_description+" ( RM "+this.menu_item_price+")";
     }
 }

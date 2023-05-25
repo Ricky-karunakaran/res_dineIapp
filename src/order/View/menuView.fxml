@@ -63,14 +63,14 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Session" />
+                  <Text fx:id ="sessionMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Session" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notification" GridPane.columnIndex="1" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Check In" GridPane.columnIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Call List" GridPane.columnIndex="3" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Feedback" GridPane.columnIndex="4" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Report" GridPane.columnIndex="5" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" GridPane.columnIndex="6" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Setting" GridPane.columnIndex="7" />
+                  <Text fx:id ="menuMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" GridPane.columnIndex="6" />
+                  <Text fx:id ="accountMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Setting" GridPane.columnIndex="7" />
                </children>
             </GridPane>
          </children>

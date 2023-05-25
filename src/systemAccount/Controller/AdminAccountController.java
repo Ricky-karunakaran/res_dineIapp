@@ -6,6 +6,7 @@ package systemAccount.Controller;
 
 import com.utils.SceneChanger;
 import com.utils.SessionManager;
+import com.utils.WindowSize;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,7 +45,6 @@ public class AdminAccountController implements Initializable {
     @FXML private TextField admin_password;
     @FXML private TextField admin_name;
     @FXML private TextField admin_number;
-
     @FXML HBox manage_restaurant;
     /**
      * Initializes the controller class.
@@ -78,6 +78,8 @@ public class AdminAccountController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if(this.backGround!=null) {this.backGround.setFitWidth(WindowSize.getScreenWidth());}
+        if(this.backGround!=null) {this.backGround.setFitHeight(WindowSize.getScreenHeight());}
         if(manage_restaurant != null){
             System.out.println("Not Null");
             manage_restaurant.setOnMouseClicked(event->{
