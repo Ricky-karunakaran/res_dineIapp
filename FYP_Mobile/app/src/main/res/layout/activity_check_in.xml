@@ -82,15 +82,30 @@
         android:id="@+id/check_in_restaurant_code"
         android:layout_width="276dp"
         android:layout_height="46dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="156dp"
         android:ems="10"
         android:gravity="center"
-        android:inputType="textPersonName"
         android:hint="Enter Restaurant Code"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintHorizontal_bias="0.577"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/check_in_restaurant_table_no"
+        android:layout_width="276dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter Table No"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/check_in_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.577"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/check_in_restaurant_code"
+        app:layout_constraintVertical_bias="0.522" />
 
     <Button
         android:id="@+id/check_in_button"

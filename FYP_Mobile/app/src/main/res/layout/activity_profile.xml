@@ -6,6 +6,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <FrameLayout
+        android:id="@+id/historyFrame"
+        android:layout_width="200dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/button_shape"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:layout_constraintVertical_bias="0.114">
+
+        <TextView
+            android:id="@+id/historyButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:inputType="none"
+            android:text="Visit History"
+            android:textAlignment="center"
+            android:textColor="#F8F8F8"
+            tools:ignore="TouchTargetSizeCheck" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/consumptionFrame"
+        android:layout_width="200dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/button_shape"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/historyFrame"
+        app:layout_constraintVertical_bias="0.144">
+
+        <TextView
+            android:id="@+id/consumptionButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:inputType="none"
+            android:text="View Consumption"
+            android:textAlignment="center"
+            android:textColor="#F8F8F8"
+            tools:ignore="TouchTargetSizeCheck" />
+    </FrameLayout>
+
     <TextView
         android:id="@+id/profile_user_name"
         android:layout_width="wrap_content"

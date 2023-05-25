@@ -45,6 +45,9 @@
         </activity>
         <activity android:name="com.customerAuthentication.view.CheckInView" android:exported="true" />
         <activity android:name="com.order.view.SessionView" android:exported="true" />
+        <activity android:name="com.order.view.CartView" android:exported="true" />
+        <activity android:name="com.order.view.WaiterView" android:exported="true" />
+        <activity android:name="com.reporting.view.VisitHistoryView" android:exported="true" />
     </application>
 
 </manifest>

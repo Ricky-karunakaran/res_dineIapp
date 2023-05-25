@@ -1,12 +1,10 @@
 package com.order.controller;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,20 +16,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.order.model.Menu;
 import com.order.model.MenuItem;
+import com.order.model.WaiterCall;
 import com.order.view.SessionView;
 import com.systemAccount.model.Restaurant;
 import com.systemAccount.model.User;
-import com.systemAccount.view.EditProfileView;
-import com.systemAccount.view.ProfileView;
+import com.utils.Dialog;
+import com.utils.JDateTime;
 import com.utils.Session;
 import com.utils.SessionManager;
 
-import org.w3c.dom.Text;
-
-import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
-public class MenuController {
+public class SessionController {
+
     private AppCompatActivity currentView;
     public void setView(AppCompatActivity v) {
         this.currentView  = v;
@@ -39,6 +36,8 @@ public class MenuController {
 
     public void fetchMenu(TextView restaurant_name, LinearLayout linear_layour) {
 
+
+        System.out.println("FetchMenuCalled");
         SessionManager sessionManager = SessionManager.getInstance();
         Session session = sessionManager.getSession();
         String session_restaurant_id = (String) session.getAttributes("session_restaurant_id");
@@ -47,15 +46,15 @@ public class MenuController {
         restaurant.setRestaurantId(session_restaurant_id);
         try {
             restaurant.read_restaurant_by_id();
-            restaurant_name.setText("Restaurant: "+restaurant.getName());
+            restaurant_name.setText("Restaurant: " + restaurant.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println(session_restaurant_id);
-        Menu menu= new Menu();
+        Menu menu = new Menu();
         menu.setMenuRestaurantId(session_restaurant_id);
         ArrayList<Menu> menus = menu.read_all_menu();
-        for(int i=0;i<menus.size();i++){
+        for (int i = 0; i < menus.size(); i++) {
             MenuItem menuItem = new MenuItem();
             menuItem.setMenuId(menus.get(i).getMenuId());
             menus.get(i).setMenuItem(menuItem.read_menu_item_list());
@@ -69,7 +68,7 @@ public class MenuController {
 
             linear_layour.addView(menuTitle);
             linear_layour.setDividerPadding(15);
-            for(int j=0;j<menus.get(i).getMenuItems().size();j++){
+            for (int j = 0; j < menus.get(i).getMenuItems().size(); j++) {
 
                 MenuItem thisMenuItem = menus.get(i).getMenuItems().get(j);
 
@@ -80,17 +79,17 @@ public class MenuController {
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
                 );
-                horizontal_layout_params.setMargins(0,10,0,10);
+                horizontal_layout_params.setMargins(0, 10, 0, 10);
                 horizontal_layout.setLayoutParams(horizontal_layout_params);
 
                 ImageView menuItemImage = new ImageView(currentView);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(thisMenuItem.getMenuItemImage(), 0, thisMenuItem.getMenuItemImage().length);
                 menuItemImage.setImageBitmap(bitmap);
-                double original_whRatio = bitmap.getWidth()/bitmap.getHeight();
+                double original_whRatio = bitmap.getWidth() / bitmap.getHeight();
                 double desired_width = 300;
                 double desired_height = 350;
 
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int)desired_width,(int)desired_height);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) desired_width, (int) desired_height);
                 menuItemImage.setLayoutParams(layoutParams);
 
                 // Setup menu info
@@ -100,7 +99,7 @@ public class MenuController {
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
                 );
-                menu_info_params.setMargins(0,10,0,10);
+                menu_info_params.setMargins(0, 10, 0, 10);
                 menu_info.setLayoutParams(menu_info_params);
 
                 menu_info.setOrientation(LinearLayout.VERTICAL);
@@ -108,12 +107,12 @@ public class MenuController {
                 // menu_info.setGravity(Gravity.CENTER);
 
 
-                TextView menuItemName= new TextView(currentView);
+                TextView menuItemName = new TextView(currentView);
                 menuItemName.setText(thisMenuItem.getMenuItemName());
                 TextView menuItemDescription = new TextView(currentView);
                 menuItemDescription.setText(thisMenuItem.getMenuItemDescription());
-                TextView menuItemPrice= new TextView(currentView);
-                menuItemPrice.setText("RM"+String.valueOf(thisMenuItem.getMenuItemPrice()));
+                TextView menuItemPrice = new TextView(currentView);
+                menuItemPrice.setText("RM" + String.valueOf(thisMenuItem.getMenuItemPrice()));
 
                 menuItemName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                 menuItemPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -129,7 +128,6 @@ public class MenuController {
                 textViewParams.setMargins(20, 5, 20, 5);
 
 
-
                 menuItemName.setLayoutParams(textViewParams);
                 menuItemPrice.setLayoutParams(textViewParams);
                 menuItemDescription.setLayoutParams(textViewParams);
@@ -140,7 +138,7 @@ public class MenuController {
                 action_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ((SessionView)currentView).add_to_cart(v.getId());
+                        ((SessionView) currentView).add_to_cart(v.getId());
                     }
                 });
                 ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
@@ -159,11 +157,11 @@ public class MenuController {
 
             }
         }
+    }
 
-
-
-
-
+    public void checkSessionStatus(){
 
     }
+
+
 }

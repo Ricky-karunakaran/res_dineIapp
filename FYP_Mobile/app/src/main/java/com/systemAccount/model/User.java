@@ -3,6 +3,7 @@ package com.systemAccount.model;
 
 import android.media.Image;
 
+import com.reporting.model.HistoryVisit;
 import com.utils.CustomException;
 import com.utils.DbBackgroundTask;
 import com.utils.dbConnection;
@@ -13,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class User implements Account {
     private String user_email;
@@ -176,6 +178,34 @@ public class User implements Account {
             pt.executeUpdate();
         } catch (Exception e){
             throw e;
+        }
+    }
+
+    public ArrayList<HistoryVisit> get_visited_restaurant() throws CustomException{
+        ArrayList<HistoryVisit> histories = new ArrayList<HistoryVisit>();
+        try{
+            Connection con = dbConnection.getDb();
+            String sql = "SELECT * from user Inner join session on user.user_email = session.session_user_id Inner join restaurant on restaurant.restaurant_id = session.session_restaurant_id Where user.user_email = ?;";
+            PreparedStatement pt = con.prepareStatement(sql);
+            pt.setString(1, this.user_email);
+            ResultSet rs = pt.executeQuery();
+            while(rs.next()){
+
+                HistoryVisit history = new HistoryVisit();
+
+                history.getRestaurant().setName(rs.getString("restaurant.restaurant_name"));
+                history.getRestaurant().setRestaurantId(rs.getString("restaurant.restaurant_id"));
+                history.getRestaurant().setLocation("restaurant.restaurant_location");
+
+                history.getSession().setSessionId(rs.getString("session.session_id"));
+                history.getSession().setSessionStartTime(rs.getString("session.session_start_time"));
+                histories.add(history);
+
+            }
+            return histories;
+        } catch (Exception e ){
+            System.out.println(e.getMessage());
+            throw new CustomException("Fail to get visit history");
         }
     }
 }

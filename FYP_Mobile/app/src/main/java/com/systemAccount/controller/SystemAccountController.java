@@ -34,6 +34,8 @@ public class SystemAccountController {
                     dine_in_session.setSessionId(user.getUserActiveSession());
                     dine_in_session.read_session_by_id();
                     session.setAttributes("session_restaurant_id",dine_in_session.getSessionRestaurantId());
+                    session.setAttributes("session_cart_id",dine_in_session.getSessionCartId());
+                    session.setAttributes("session_bill_id",dine_in_session.getSessionBillId());
 
                 }
 
@@ -90,6 +92,9 @@ public class SystemAccountController {
         try{
             if(user.register(password))
             {
+                SessionManager sessionManager = SessionManager.getInstance();
+                Session session = sessionManager.getSession();
+                session.setAttributes("user",user);
                 Intent intent = new Intent(currentView,HomeView.class);
                 currentView.startActivity(intent);
             }

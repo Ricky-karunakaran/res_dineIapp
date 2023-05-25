@@ -48,31 +48,32 @@
                 android:weightSum="4">
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/session_order_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/list_icon" />
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/session_waiter_button"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/call_icon" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/session_bill_button"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/payment_icon" />
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/session_checkout_button"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:onClick="check_out"
                     app:srcCompat="@drawable/checkout_icon" />
             </LinearLayout>
 

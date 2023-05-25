@@ -1,5 +1,6 @@
 package com.order.model;
 
+import com.utils.CustomException;
 import com.utils.dbConnection;
 
 import java.sql.Connection;
@@ -61,5 +62,27 @@ public class MenuItem {
         }catch(Exception e){
         }
         return menuItems;
+    }
+    public void read_menu_item_by_id() throws Exception {
+        try{
+            Connection con = dbConnection.getDb();
+            String sql = "SELECT menu_item_name,menu_item_description,menu_item_price from menu_item where menu_item_id = ?";
+            PreparedStatement pt = con.prepareStatement(sql);
+            pt.setString(1,this.menu_item_id);
+            ResultSet rt = pt.executeQuery();
+            if(rt.next()){
+                this.menu_item_name = rt.getString("menu_item_name");
+                this.menu_item_description = rt.getString("menu_item_description");
+                this.menu_item_price = rt.getDouble("menu_item_price");
+            } else {
+                throw new CustomException("No Restaurant found");
+            }
+        } catch (CustomException e ){
+            throw e;
+
+        } catch (Exception e){
+            System.out.println(e);
+            throw new Exception("System error, fail to check restaurant infomation");
+        }
     }
 }
