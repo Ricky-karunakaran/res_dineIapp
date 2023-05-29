@@ -4,12 +4,16 @@
  */
 package order.Controller;
 
+import com.utils.SceneChanger;
 import com.utils.Session;
 import com.utils.SessionManager;
 import helper.NotificationDataFetchService;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -23,7 +27,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
 import javafx.scene.media.AudioClip;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import order.Model.Notification;
 import order.Model.WaiterCall;
@@ -34,6 +40,7 @@ import systemAccount.Model.Restaurant;
  * @author Ricky
  */
 public class WaiterCallController implements Initializable {
+    @FXML Region main_container;
     @FXML TableView tableView;
     @FXML TableColumn notification_time;
     @FXML TableColumn notification_type;
@@ -68,27 +75,63 @@ public class WaiterCallController implements Initializable {
             notification.setNotificationRestaurantId(restaurant.getRestaurantId());
             ObservableList<Notification> notifications = FXCollections.observableArrayList(notification.get_all_notification());
             tableView.setItems(notifications);
-            tableView.setRowFactory(row -> new TableRow<Notification>(){
-                @Override
-                protected void updateItem(Notification notification, boolean empty){
-                    super.updateItem(notification,empty);
-                    if(notification!=null) {
-                        if(notification.getNotificationStatus().equals("UNREAD")){
-                            
-                        setStyle("-fx-background-color: lightpink;");
-                        String audioFile = "/assets/sticky.mp3";
-                        AudioClip audioClip = new AudioClip(getClass().getResource(audioFile).toString());
-                        audioClip.play();
-//                        audioClip = new AudioClip(getClass().getResource("/assets/sticky.mp3").toString());
-//                        audioClip.play();
-                        }
-                        else {
-                            setStyle("");
+            tableView.setRowFactory(row->{
+                    TableRow<Notification> tableRow = new TableRow<Notification>() {
+                    @Override
+                    protected void updateItem(Notification notification, boolean empty) {
+                        super.updateItem(notification, empty);
+                        if (notification != null) {
+                            if (notification.getNotificationStatus().equals("UNREAD")) {
+                                setStyle("-fx-background-color: lightpink;");
+                                String audioFile = "/assets/sticky.mp3";
+                                AudioClip audioClip = new AudioClip(getClass().getResource(audioFile).toString());
+                                audioClip.play();
+                            } else {
+                                setStyle("");
+                            }
                         }
                     }
-                    
-                }
+                };
+
+                tableRow.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && !tableRow.isEmpty()) {
+                        Notification clickedNotification = tableRow.getItem();
+                        if(clickedNotification.getNotificationType().equals("New Feedback")){
+                            try {
+                                
+                                sessionManager.getSession().setAttributes("viewing_feedback_session_id", clickedNotification.getNotificationSessionId());
+                                SceneChanger.changeScene((Stage) tableView.getScene().getWindow(), "/reporting/View/feedbackDetailView.fxml");
+                            } catch (IOException ex) {
+                                Logger.getLogger(WaiterCallController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        // Handle the row click event
+                        System.out.println("Clicked on row: " + clickedNotification.getNotificationSessionId());
+                    }
+                });
+                return tableRow;
             });
+//            tableView.setRowFactory(row -> new TableRow<Notification>(){
+//                @Override
+//                protected void updateItem(Notification notification, boolean empty){
+//                    super.updateItem(notification,empty);
+//                    if(notification!=null) {
+//                        if(notification.getNotificationStatus().equals("UNREAD")){
+//                            
+//                        setStyle("-fx-background-color: lightpink;");
+//                        String audioFile = "/assets/sticky.mp3";
+//                        AudioClip audioClip = new AudioClip(getClass().getResource(audioFile).toString());
+//                        audioClip.play();;
+//                        }
+//                        else {
+//                            setStyle("");
+//                        }
+//                    }
+//                    
+//                }
+//            });
+            
+
             int numRows = tableView.getItems().size();
             double rowHeight = tableView.getFixedCellSize();
             double prefHeight = numRows * (rowHeight + 1.0) + 26.0; // 26.0 is the default table header height

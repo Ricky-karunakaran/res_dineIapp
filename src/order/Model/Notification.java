@@ -65,7 +65,9 @@ public class Notification {
                 notification.setNotificationUserName(rs.getString("user.user_name"));
                 notifications.add(notification);
             }
+            con.close();
             this.batch_update_notification_status(notifications);
+            
             return notifications;
         }catch(Exception e){
             System.out.println(e);
@@ -79,6 +81,7 @@ public class Notification {
             PreparedStatement pt = con.prepareStatement(sql);
             pt.setString(1, this.notification_id);
             pt.executeUpdate();
+            con.close();
         }catch(Exception e){
             System.out.println(e);
             throw new Exception("Error to update notification status");

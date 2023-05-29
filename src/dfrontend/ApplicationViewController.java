@@ -86,6 +86,14 @@ public class ApplicationViewController implements Initializable {
             });
         }
     }
+    
+    public void show_reset_password(){
+        try {
+            SceneChanger.changeScene((Stage)this.mainContainer.getScene().getWindow(), "/systemAccount/View/resetPasswordView.fxml");
+        } catch (IOException ex) {
+            Logger.getLogger(ApplicationViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     
 }

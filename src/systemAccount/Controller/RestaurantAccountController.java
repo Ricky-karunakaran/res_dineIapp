@@ -22,20 +22,26 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
 import systemAccount.Model.Restaurant;
 import com.utils.ActionCell;
+import com.utils.CustomException;
+import com.utils.FormatVerifier;
 import com.utils.SceneChanger;
 import com.utils.Session;
 import com.utils.SessionManager;
+import helper.EmailService;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import systemAccount.Model.Model;
+import systemAccount.Model.Reset_Password_Request;
 
 /**
  *
@@ -53,7 +59,81 @@ public class RestaurantAccountController implements Initializable{
     @FXML Text detail_location;
     @FXML Text detail_operation_hour;
     
+    @FXML TextField reset_password_email_input;
+    @FXML TextField verification_code_input;
+    @FXML TextField reset_password_new_password;
+    @FXML Button reset_button;
+    @FXML Button reset_password_submit;
     public void deleteRestaurant(String email){
+        
+    }
+    
+    public void send_reset_password(){
+        System.out.println(this.reset_password_email_input.getText());
+        String email = this.reset_password_email_input.getText();
+        if(FormatVerifier.isEmail(email)){
+            Reset_Password_Request reset = new Reset_Password_Request();
+            reset.setResetPasswordUserEmail(email);
+            reset.add_request();
+            EmailService service = new EmailService();
+            try {
+                String title = "Foodverse password reset";
+                String content = "This is your verification code for password reset : "+reset.getResetPasswordRandomCode();
+                service.sendEmail("ricky.k@graduate.utm.my",title,content);
+                this.reset_button.setVisible(true);
+                this.verification_code_input.setVisible(true);
+                this.reset_password_new_password.setVisible(true);
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("A verification code has been sent to the email, please check your mail box.");
+                a.setHeaderText("Verification Code Sent");
+                a.show();
+                this.reset_password_email_input.setVisible(false);
+                this.reset_password_submit.setVisible(false);
+            } catch (GeneralSecurityException ex) {
+                Logger.getLogger(RestaurantAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(RestaurantAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("Please enter correct email address");
+                a.setHeaderText("Invalid email address");
+                a.show();
+        }
+        
+    }
+    
+    public void reset_password(){
+        String code = verification_code_input.getText();
+        String newPassword = this.reset_password_new_password.getText();
+        String email = this.reset_password_email_input.getText();
+        try{
+            Reset_Password_Request reset = new Reset_Password_Request();
+            reset.setResetPasswordUserEmail(email);
+            reset.get_request_by_user_email();
+            if(!code.equals(reset.getResetPasswordRandomCode())){ throw new CustomException("Verification code not match");}
+            if(newPassword.isEmpty()){ throw new CustomException("New password is empty"); }
+            Restaurant restaurant = new Restaurant();
+            if(restaurant.reset_password( email, newPassword)) {
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("Password reset successfully");
+                a.setHeaderText("Password Reset");
+                a.show();
+                try {
+                    SceneChanger.changeScene((Stage) this.verification_code_input.getScene().getWindow(), "/systemAccount/View/loginView.fxml");
+                } catch (IOException ex) {
+                    Logger.getLogger(RestaurantAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+ }
+            
+        } catch (CustomException e){
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setContentText(e.getMessage());
+            a.setHeaderText("Fail to reset password");
+            a.show();
+        }
+        
+        
         
     }
     @Override

@@ -31,7 +31,6 @@ public final class dbConnection {
         try{
         String url = "jdbc:mysql://"+hostName+"/"+dbName+"?"+urlParameter;
         Class.forName(driver);
-        System.out.println(url);
         Connection con = DriverManager.getConnection(url, user, password);
         return con;
     } catch (Exception e){

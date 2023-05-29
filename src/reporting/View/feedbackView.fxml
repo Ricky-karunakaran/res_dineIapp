@@ -11,8 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="main_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customerAuthentication.Controller.CheckInController">
-      <top>
+<BorderPane fx:id="main_container" minWidth="1200.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reporting.Controller.FeedbackController">
+    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="600.0" BorderPane.alignment="CENTER_LEFT">
          <children>
             <GridPane>
@@ -30,14 +30,14 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text fx:id ="sessionMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Session" />
-                  <Text fx:id ="notificationMenuItem" strokeWidth="0.0" text="Notification" GridPane.columnIndex="1" />
-                  <Text fx:id ="checkInMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Check In" GridPane.columnIndex="2" />
-                  <Text fx:id ="callListMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Call List" GridPane.columnIndex="3" />
-                  <Text fx:id="feedbackMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Feedback" GridPane.columnIndex="4" />
-                  <Text fx:id="reportMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Report" GridPane.columnIndex="5" />
-                  <Text fx:id ="menuMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" GridPane.columnIndex="6" />
-                  <Text fx:id ="accountMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Setting" GridPane.columnIndex="7" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Session" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notification" GridPane.columnIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Check In" GridPane.columnIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Call List" GridPane.columnIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Feedback" GridPane.columnIndex="4" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Report" GridPane.columnIndex="5" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" GridPane.columnIndex="6" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Setting" GridPane.columnIndex="7" />
                </children>
             </GridPane>
          </children>
@@ -48,21 +48,24 @@
    </top>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </BorderPane.margin>
          <children>
-            <TableView fx:id="tableView" fixedCellSize="40.0" prefHeight="66.0" prefWidth="562.0">
+            <TableView fx:id="tableView" fixedCellSize="60.0" prefHeight="334.0" prefWidth="762.0">
               <columns>
-                <TableColumn fx:id="session_user_name" prefWidth="75.0" text="Customer Name" />
-                <TableColumn fx:id="session_status" prefWidth="75.0" text="Status" />
-                  <TableColumn fx:id="session_detail" prefWidth="75.0" />
+                  <TableColumn fx:id="c_feedback_date_time" prefWidth="145.5999755859375" text="Feedback Time" />
+                <TableColumn fx:id="c_feedback_session_id" prefWidth="78.4000244140625" text="Session ID" />
+                <TableColumn fx:id="c_feedback_user_name" prefWidth="75.0" text="User Name" />
+                  <TableColumn fx:id="c_feedback_content" prefWidth="75.0" text="Feedback Content" />
+                  <TableColumn fx:id="c_feedback_reply" prefWidth="75.0" text="Feedback Reply" />
+                  <TableColumn fx:id="c_feedback_detail_button" prefWidth="75.0" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
          </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin>
       </VBox>
    </center>
 </BorderPane>

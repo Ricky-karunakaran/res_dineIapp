@@ -43,6 +43,23 @@ public class Dine_In_Session {
     public String getSessionStatus() { return this.session_status;} 
     public Dine_In_Session(){}
     
+    public void get_session_by_id(){
+        try{
+            Connection con = dbConnection.getDb();
+            String sql = "SELECT * from session INNER JOIN user on session.session_user_id= user.user_email WHERE session_id = ? ";
+            PreparedStatement pt = con.prepareStatement(sql);
+            pt.setString(1, this.session_id);
+            ResultSet rs = pt.executeQuery();
+            if(rs.next()){
+                this.setSessionId(rs.getString("session_id"));
+                this.setSessionUserName(rs.getString("user_name"));
+                this.setSessionBillId(rs.getString("session_bill_id"));
+                this.setSessionStatus(rs.getString("session_status"));
+            }
+            con.close();
+        } catch(Exception e){
+        }
+    }
     public void check_out_session(){
         try{
             Connection con = dbConnection.getDb();

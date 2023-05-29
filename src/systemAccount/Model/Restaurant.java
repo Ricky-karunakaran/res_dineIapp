@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import com.utils.Model;
+import java.sql.PreparedStatement;
 /**
  *
  * @author Ricky
@@ -108,7 +109,18 @@ public class Restaurant extends Model implements Account {
 
     @Override
     public boolean reset_password(String email, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            String sql = "UPDATE restaurant set restaurant_password = ? WHERE restaurant_email = ?";
+            Connection con = dbConnection.getDb();
+            PreparedStatement pt = con.prepareStatement(sql);
+            pt.setString(1, password);
+            pt.setString(2, email);
+            pt.execute();
+            return true;
+        } catch (Exception e){
+            
+        }
+        return false;
     }
     
     public void refreshData(){

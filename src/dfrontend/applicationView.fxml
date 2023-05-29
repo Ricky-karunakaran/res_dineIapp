@@ -20,7 +20,7 @@
       </ImageView>
       <AnchorPane layoutX="65.0" layoutY="53.0" prefHeight="295.0" prefWidth="470.0" style="-fx-background-color: white; -fx-border-radius: 50;" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="53.0">
          <children>
-            <GridPane alignment="CENTER" layoutX="7.0" prefHeight="295.0" prefWidth="470.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane alignment="CENTER" layoutX="7.0" prefHeight="295.0" prefWidth="470.0" scaleShape="false" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -46,18 +46,19 @@
                   </Text>
                   <VBox alignment="CENTER" spacing="20.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="190.0" style="-fx-background-color: Black;" text="Login" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="190.0" style="-fx-background-color: Black;" styleClass="action-button" stylesheets="@../css/style.css" text="Login" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="registerButton" alignment="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="190.0" style="-fx-background-color: Black;" text="Sign Up" textFill="WHITE">
+                        <Button fx:id="registerButton" alignment="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="190.0" style="-fx-background-color: Black;" styleClass="action-button" stylesheets="@../css/style.css" text="Sign Up" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Button>
                      </children>
                   </VBox>
+                  <Text onMouseClicked="#show_reset_password"  fx:id="reset_password" strokeType="OUTSIDE" strokeWidth="0.0" text="Forget Password" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </children>

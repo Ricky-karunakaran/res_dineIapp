@@ -23,6 +23,17 @@
     -fx-border-radius:20;
 }
 
+.action-button-long{
+    -fx-min-width: 250px;
+    -fx-max-width: 350px;
+    -fx-min-height: 50px;
+    -fx-max-height: 50px;
+    -fx-font-size: 20px;
+    -fx-background-color:#000000;
+    -fx-text-fill:#FFFFFF;
+    -fx-border-radius:20;
+}
+
 .main-container {
     -fx-background-color: #577D86;
 }

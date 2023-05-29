@@ -62,7 +62,9 @@ public class CheckInController extends ControllerBase implements Initializable {
     @FXML private Text checkInMenuItem;
     @FXML private Text notificationMenuItem;
     @FXML private Text callListMenuItem;
-    
+    @FXML private Text feedbackMenuItem;
+    @FXML private Text reportMenuItem;
+
     Timeline sessionTimeline;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -187,33 +189,33 @@ public class CheckInController extends ControllerBase implements Initializable {
         tableView.setPrefHeight(prefHeight);
     }
     public void setupMenuRoute(){
+        
+        if(sessionTimeline != null) { sessionTimeline.stop(); }
+        
         if(this.menuMenuItem != null ){
             this.menuMenuItem.setOnMouseClicked(event -> {
             try{
-                if(sessionTimeline != null) { sessionTimeline.stop(); }
-                
                 SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/order/View/menuView.fxml");
             }   catch (IOException ex) {
                     Logger.getLogger(CheckInController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
         }
-        if(this.accountMenuItem != null ){
-            this.accountMenuItem.setOnMouseClicked(event -> {
-            try{
-                if(sessionTimeline != null) { sessionTimeline.stop(); }
-                SceneChanger.getInstance().getRouteHistory().show();
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/systemAccount/View/editAccountView.fxml");
+        
+        if(this.checkInMenuItem != null ){
+            this.checkInMenuItem.setOnMouseClicked(event -> {
+            try{                
+                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/customerAuthentication/View/checkInRequestView.fxml");
             }   catch (IOException ex) {
-                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CheckInController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
         }
-        if(this.sessionMenuItem != null ){
-            this.sessionMenuItem.setOnMouseClicked(event -> {
+        
+        if(this.accountMenuItem != null ){
+            this.accountMenuItem.setOnMouseClicked(event -> {
             try{
-                if(sessionTimeline != null) { sessionTimeline.stop(); }
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/customerAuthentication/View/sessionView.fxml");
+                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/systemAccount/View/editAccountView.fxml");
             }   catch (IOException ex) {
                     Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -223,7 +225,6 @@ public class CheckInController extends ControllerBase implements Initializable {
         if(this.sessionMenuItem != null ){
             this.sessionMenuItem.setOnMouseClicked(event -> {
             try{
-                if(sessionTimeline != null) { sessionTimeline.stop(); }
                 SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/customerAuthentication/View/sessionView.fxml");
             }   catch (IOException ex) {
                     Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
@@ -234,18 +235,37 @@ public class CheckInController extends ControllerBase implements Initializable {
          if(this.notificationMenuItem != null ){
             this.notificationMenuItem.setOnMouseClicked(event -> {
             try{
-                if(sessionTimeline != null) { sessionTimeline.stop(); }
                 SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/order/View/notificationView.fxml");
             }   catch (IOException ex) {
                     Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
         }
-         if(this.callListMenuItem != null ){
+
+        if(this.callListMenuItem != null ){
             this.callListMenuItem.setOnMouseClicked(event -> {
             try{
-                if(sessionTimeline != null) { sessionTimeline.stop(); }
                 SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/order/View/callListView.fxml");
+            }   catch (IOException ex) {
+                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        }
+        
+        if(this.feedbackMenuItem != null ){
+            this.feedbackMenuItem.setOnMouseClicked(event -> {
+            try{
+                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/reporting/View/feedbackView.fxml");
+            }   catch (IOException ex) {
+                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        }
+        
+        if(this.reportMenuItem != null ){
+            this.reportMenuItem.setOnMouseClicked(event -> {
+            try{
+                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/reporting/View/reportView.fxml");
             }   catch (IOException ex) {
                     Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
                 }
