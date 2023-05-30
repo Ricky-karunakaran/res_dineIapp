@@ -6,16 +6,14 @@
     android:layout_height="match_parent">
 
     <FrameLayout
+        android:id="@+id/frameLayout7"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout6"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout5"
-        app:layout_constraintVertical_bias="0.733">
+        app:layout_constraintTop_toBottomOf="@+id/backFrame">
 
         <LinearLayout
             android:id="@+id/linearLayout7"
@@ -41,13 +39,12 @@
 
     <FrameLayout
         android:id="@+id/frameLayout6"
-        android:layout_width="404dp"
-        android:layout_height="621dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="414dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout5">
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout7">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -62,7 +59,7 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/frameLayout5"
+        android:id="@+id/backFrame"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/bottom_border"

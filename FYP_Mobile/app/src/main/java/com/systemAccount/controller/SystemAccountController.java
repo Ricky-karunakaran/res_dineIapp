@@ -7,11 +7,20 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.customerAuthentication.model.Dine_In_Session;
+import com.systemAccount.model.Reset_Password_Request;
 import com.systemAccount.model.User;
 import com.customerAuthentication.view.HomeView;
 import com.utils.CustomException;
+import com.utils.Dialog;
+import com.utils.EmailService;
+import com.utils.FormatVerifier;
 import com.utils.Session;
 import com.utils.SessionManager;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SystemAccountController {
     private AppCompatActivity currentView;
@@ -141,6 +150,31 @@ public class SystemAccountController {
             dialog.show();
         }
 
+    }
+
+    public void send_verification_code(String email){
+
+        if(FormatVerifier.isEmail(email)){
+            Reset_Password_Request reset = new Reset_Password_Request();
+            reset.setResetPasswordUserEmail(email);
+            reset.add_request();
+            EmailService service = new EmailService();
+            try {
+                String title = "Foodverse password reset";
+                String content = "This is your verification code for password reset : "+reset.getResetPasswordRandomCode();
+                service.sendEmail("ricky.k@graduate.utm.my",title,content);
+                Dialog.dialog(this.currentView,"Verification Code Sent","A verification code has been sent to the email, please check your mail box.",false);
+            } catch (GeneralSecurityException ex) {
+                Logger.getLogger(RestaurantAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(RestaurantAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            Dialog.dialog(this.currentView,
+                    "Invalid email address",
+                    "Please enter correct email address",
+                    false);
+        }
     }
 
 }

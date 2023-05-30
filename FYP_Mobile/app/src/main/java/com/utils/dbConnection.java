@@ -15,7 +15,7 @@ public final class dbConnection {
 //    private static String user = "fyp_res_ricky";
 //    private static String password = "rootFYPRes-22";
 
-    private static String hostName = "10.213.99.73";
+    private static String hostName = "10.213.98.99";
     private static String urlParameter ="";
     private static String user = "ricky";
     private static String password = "1234";

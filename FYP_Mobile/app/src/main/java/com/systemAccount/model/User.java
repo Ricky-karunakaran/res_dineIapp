@@ -3,6 +3,7 @@ package com.systemAccount.model;
 
 import android.media.Image;
 
+import com.reporting.model.Consumption;
 import com.reporting.model.HistoryVisit;
 import com.utils.CustomException;
 import com.utils.DbBackgroundTask;
@@ -185,7 +186,7 @@ public class User implements Account {
         ArrayList<HistoryVisit> histories = new ArrayList<HistoryVisit>();
         try{
             Connection con = dbConnection.getDb();
-            String sql = "SELECT * from user Inner join session on user.user_email = session.session_user_id Inner join restaurant on restaurant.restaurant_id = session.session_restaurant_id Where user.user_email = ?;";
+            String sql = "SELECT * from user Inner join session on user.user_email = session.session_user_id Inner join restaurant on restaurant.restaurant_id = session.session_restaurant_id Where user.user_email = ? ORDER BY session.session_id DESC;";
             PreparedStatement pt = con.prepareStatement(sql);
             pt.setString(1, this.user_email);
             ResultSet rs = pt.executeQuery();
@@ -196,8 +197,8 @@ public class User implements Account {
                 history.getRestaurant().setName(rs.getString("restaurant.restaurant_name"));
                 history.getRestaurant().setRestaurantId(rs.getString("restaurant.restaurant_id"));
                 history.getRestaurant().setLocation("restaurant.restaurant_location");
-
                 history.getSession().setSessionId(rs.getString("session.session_id"));
+                System.out.println(history.getSession().getSessionId());
                 history.getSession().setSessionStartTime(rs.getString("session.session_start_time"));
                 histories.add(history);
 
@@ -208,4 +209,34 @@ public class User implements Account {
             throw new CustomException("Fail to get visit history");
         }
     }
+
+    public ArrayList<HistoryVisit> get_consumption() throws CustomException{
+        ArrayList<HistoryVisit> histories = new ArrayList<HistoryVisit>();
+        try{
+            Connection con = dbConnection.getDb();
+            String sql = "SELECT user.user_email,restaurant.restaurant_name,session.session_start_time,bill.bill_amount,bill.bill_status from user INNER JOIN session on session.session_user_id = user.user_email INNER JOIN restaurant on restaurant.restaurant_id = session.session_restaurant_id INNER JOIN bill on bill.bill_id = session.session_bill_id WHERE user.user_email = ? AND bill.bill_status = ?";
+            PreparedStatement pt = con.prepareStatement(sql);
+            pt.setString(1, this.user_email);
+            pt.setString(2, "SOLVED");
+            ResultSet rs = pt.executeQuery();
+            while(rs.next()){
+
+                Consumption consumption = new Consumption();
+
+                consumption.getRestaurant().setName(rs.getString("restaurant.restaurant_name"));
+                consumption.getRestaurant().setRestaurantId(rs.getString("restaurant.restaurant_id"));
+                consumption.getRestaurant().setLocation("restaurant.restaurant_location");
+                consumption.getSession().setSessionId(rs.getString("session.session_id"));
+//                System.out.println(history.getSession().getSessionId());
+//                history.getSession().setSessionStartTime(rs.getString("session.session_start_time"));
+//                histories.add(history);
+
+            }
+            return histories;
+        } catch (Exception e ){
+            System.out.println(e.getMessage());
+            throw new CustomException("Fail to get visit history");
+        }
+    }
+
 }

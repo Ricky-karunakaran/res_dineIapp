@@ -20,8 +20,11 @@ import com.order.model.BillItem;
 import com.order.model.Cart;
 import com.order.model.CartItem;
 import com.order.model.MenuItem;
+import com.order.model.Notification;
+import com.order.model.WaiterCall;
 import com.order.view.CartView;
 import com.order.view.SessionView;
+import com.utils.Dialog;
 import com.utils.Session;
 import com.utils.SessionManager;
 
@@ -242,12 +245,14 @@ public class CartController  {
                 }
             });
             builder.show();
-
+            String session_id = (String) session.getAttributes("session_id");
+            this.notify_restaurant("You have received new order from session "+session_id,"New Order Received",session_id);
+            Intent intent = new Intent(currentView, SessionView.class);
+            currentView.startActivity(intent);
         } catch(Exception e){
 
         }
-        Intent intent = new Intent(currentView, SessionView.class);
-        currentView.startActivity(intent);
+
 
     }
 
@@ -267,5 +272,18 @@ public class CartController  {
         CartItem cartItem = new CartItem();
         cartItem.setCartItemId(String.valueOf(cart_item_id));
         cartItem.remove_cart_item();
+    }
+
+    public void notify_restaurant(String content, String type, String session_id){
+        try{
+            Notification notification = new Notification();
+            notification.setNotificationContent(content);
+            notification.setNotificationType(type);
+            notification.setNotificationSessionId(session_id);
+            notification.add_notification();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            Dialog.dialog(this.currentView,"Fail To Notify Restaurant","Fail to send notification to restaurat, please contact restaurant staff", false);
+        }
     }
 }

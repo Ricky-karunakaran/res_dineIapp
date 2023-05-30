@@ -12,6 +12,7 @@
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/drawable/input_box.xml" value="0.146" />
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/drawable/shape.xml" value="0.2265" />
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activiti_restaurant_list.xml" value="0.4" />
+        <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_add_feedback.xml" value="0.264" />
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_check_in.xml" value="0.2" />
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_edit_profile.xml" value="0.2" />
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_home.xml" value="0.1" />
@@ -19,11 +20,13 @@
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_main.xml" value="0.3302891933028919" />
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_profile.xml" value="0.264" />
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_register.xml" value="0.2968036529680365" />
+        <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_reset_password.xml" value="0.253125" />
+        <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_reset_password_confirm.xml" value="0.2" />
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_restaurant_list.xml" value="0.536" />
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_session.xml" value="0.264" />
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_session_bill.xml" value="0.2056434373663959" />
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_session_cart.xml" value="0.2" />
-        <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_visit_history.xml" value="0.3096525096525097" />
+        <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_visit_history.xml" value="0.264" />
         <entry key="..\:/Final_Year_Project/FYP_Mobile/app/src/main/res/layout/activity_waiter_view.xml" value="0.2" />
       </map>
     </option>

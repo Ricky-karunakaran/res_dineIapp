@@ -16,4 +16,13 @@ public class JDateTime {
         String strDate = dateFormat.format(date);
         return strDate;
     }
+    public static Date getDate(String date_string){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        try{
+            Date date = dateFormat.parse(date_string);
+            return date;
+        }catch(Exception e){
+            return null;
+        }
+    }
 }

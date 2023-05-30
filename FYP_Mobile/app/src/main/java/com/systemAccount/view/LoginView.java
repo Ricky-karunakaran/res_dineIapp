@@ -1,6 +1,7 @@
 package com.systemAccount.view;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -33,5 +34,10 @@ public class LoginView extends AppCompatActivity {
         EditText email = (EditText) findViewById(R.id.email_input);
         EditText password = (EditText) findViewById(R.id.password_input);
         controller.login(email.getText().toString(),password.getText().toString());
+    }
+
+    public void toResetPassword(View v){
+        Intent intent = new Intent(this, ResetPasswordView.class);
+        startActivity(intent);
     }
 }
