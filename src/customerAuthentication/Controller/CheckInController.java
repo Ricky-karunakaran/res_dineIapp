@@ -44,7 +44,6 @@ import systemAccount.Model.User;
  * @author Ricky
  */
 public class CheckInController extends ControllerBase implements Initializable {
-    @FXML Region main_container;
     @FXML TableView tableView;
     @FXML TableColumn session_user_name;
     @FXML TableColumn session_status;
@@ -56,16 +55,8 @@ public class CheckInController extends ControllerBase implements Initializable {
     @FXML TableColumn accept;
     @FXML TableColumn reject;
     
-    @FXML private Text menuMenuItem;
-    @FXML private Text sessionMenuItem;
-    @FXML private Text accountMenuItem;
-    @FXML private Text checkInMenuItem;
-    @FXML private Text notificationMenuItem;
-    @FXML private Text callListMenuItem;
-    @FXML private Text feedbackMenuItem;
-    @FXML private Text reportMenuItem;
-
     Timeline sessionTimeline;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String view = location.toString().substring(location.toString().lastIndexOf("/")+1);
@@ -188,90 +179,10 @@ public class CheckInController extends ControllerBase implements Initializable {
         double prefHeight = numRows * (rowHeight + 1.0) + 26.0; // 26.0 is the default table header height
         tableView.setPrefHeight(prefHeight);
     }
-    public void setupMenuRoute(){
-        
+    
+    @Override
+    public void beforeRoute(){
         if(sessionTimeline != null) { sessionTimeline.stop(); }
-        
-        if(this.menuMenuItem != null ){
-            this.menuMenuItem.setOnMouseClicked(event -> {
-            try{
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/order/View/menuView.fxml");
-            }   catch (IOException ex) {
-                    Logger.getLogger(CheckInController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
-        
-        if(this.checkInMenuItem != null ){
-            this.checkInMenuItem.setOnMouseClicked(event -> {
-            try{                
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/customerAuthentication/View/checkInRequestView.fxml");
-            }   catch (IOException ex) {
-                    Logger.getLogger(CheckInController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
-        
-        if(this.accountMenuItem != null ){
-            this.accountMenuItem.setOnMouseClicked(event -> {
-            try{
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/systemAccount/View/editAccountView.fxml");
-            }   catch (IOException ex) {
-                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
-        
-        if(this.sessionMenuItem != null ){
-            this.sessionMenuItem.setOnMouseClicked(event -> {
-            try{
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/customerAuthentication/View/sessionView.fxml");
-            }   catch (IOException ex) {
-                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
-        
-         if(this.notificationMenuItem != null ){
-            this.notificationMenuItem.setOnMouseClicked(event -> {
-            try{
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/order/View/notificationView.fxml");
-            }   catch (IOException ex) {
-                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
-
-        if(this.callListMenuItem != null ){
-            this.callListMenuItem.setOnMouseClicked(event -> {
-            try{
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/order/View/callListView.fxml");
-            }   catch (IOException ex) {
-                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
-        
-        if(this.feedbackMenuItem != null ){
-            this.feedbackMenuItem.setOnMouseClicked(event -> {
-            try{
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/reporting/View/feedbackView.fxml");
-            }   catch (IOException ex) {
-                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
-        
-        if(this.reportMenuItem != null ){
-            this.reportMenuItem.setOnMouseClicked(event -> {
-            try{
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/reporting/View/reportView.fxml");
-            }   catch (IOException ex) {
-                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
-         
     }
     
 }

@@ -6,6 +6,7 @@
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/reporting/View/reportView.fxml</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/com/utils/DataFetchService.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/helper/SessionOrderFetchService.java</file>
+            <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/reporting/View/reportSpecificSalesView.fxml</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/order/Model/Notification.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/reporting/View/reportAttributeSelectionView.fxml</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/com/utils/JDateTime.java</file>
@@ -26,7 +27,9 @@
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/systemAccount/View/manageRestaurantView.fxml</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/customerAuthentication/Controller/CheckInController.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/dfrontend/adminApplicationView.fxml</file>
+            <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/reporting/View/saleReportView.fxml</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/customerAuthentication/View/sessionDetailView.fxml</file>
+            <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/reporting/View/reportSpecificDateSelectionView.fxml</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/nbproject/build-impl.xml</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/systemAccount/Model/Admin.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/order/View/menuDetailView.fxml</file>
@@ -51,6 +54,7 @@
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/com/utils/CustomException.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/systemAccount/View/resetPasswordView.fxml</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/reporting/Controller/ReportingController.java</file>
+            <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/com/utils/PDFPrinter.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/systemAccount/Model/User.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/systemAccount/Controller/SystemAccountController.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/order/Model/MenuItem.java</file>
@@ -58,6 +62,7 @@
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/order/View/menuView.fxml</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/systemAccount/View/restaurantDetailView.fxml</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/customerAuthentication/View/sessionView.fxml</file>
+            <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/reporting/Model/Sale_Report.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/helper/SessionDataFetchService.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/css/style.css</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/order/View/addOrderView.fxml</file>
@@ -72,6 +77,7 @@
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/order/Controller/WaiterCallController.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/com/utils/Session.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/com/utils/dbConnection.java</file>
+            <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/com/utils/DesktopAlert.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/order/Model/Bill.java</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/order/View/notificationView.fxml</file>
             <file>file:/D:/Final%20Year%20Project/FYP%20Desktop/Dfrontend/src/com/utils/FileLogger.java</file>

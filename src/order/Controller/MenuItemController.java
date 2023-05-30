@@ -4,6 +4,7 @@
  */
 package order.Controller;
 
+import com.utils.ControllerBase;
 import com.utils.SceneChanger;
 import com.utils.SessionManager;
 import java.io.File;
@@ -28,7 +29,7 @@ import order.Model.MenuItem;
  *
  * @author Ricky
  */
-public class MenuItemController implements Initializable {
+public class MenuItemController extends ControllerBase implements Initializable {
     @FXML Region main_container;
     @FXML Text input_file_name;
     public String file_uploaded;
@@ -41,7 +42,7 @@ public class MenuItemController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String view = location.toString().substring(location.toString().lastIndexOf("/")+1);
-
+        this.setupMenuRoute();
         if(view.equals("editMenuItemView.fxml")){
             this.initialize_menu_item_edit();
         }

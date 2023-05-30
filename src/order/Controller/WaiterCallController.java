@@ -4,6 +4,7 @@
  */
 package order.Controller;
 
+import com.utils.ControllerBase;
 import com.utils.SceneChanger;
 import com.utils.Session;
 import com.utils.SessionManager;
@@ -39,7 +40,7 @@ import systemAccount.Model.Restaurant;
  *
  * @author Ricky
  */
-public class WaiterCallController implements Initializable {
+public class WaiterCallController extends ControllerBase implements Initializable {
     @FXML Region main_container;
     @FXML TableView tableView;
     @FXML TableColumn notification_time;
@@ -57,7 +58,7 @@ public class WaiterCallController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String view = location.toString().substring(location.toString().lastIndexOf("/")+1);
-        
+        this.setupMenuRoute();
         // this.setupMenuRoute();
         if(view.equals("notificationView.fxml")){
             this.initialize_notification_view();
@@ -174,6 +175,10 @@ public class WaiterCallController implements Initializable {
            waiter_call.setWaiterCallRestaurantId(restaurant.getRestaurantId());
            ObservableList<WaiterCall> waiter_calls = FXCollections.observableArrayList(waiter_call.read_all_waiter_calls());  
            tableView.setItems(waiter_calls);
+           int numRows = tableView.getItems().size();
+           double rowHeight = tableView.getFixedCellSize();
+           double prefHeight = numRows * (rowHeight + 1.0) + 26.0; // 26.0 is the default table header height
+           tableView.setPrefHeight(prefHeight);
            waiter_call_time.setCellValueFactory(new PropertyValueFactory<>("waiterCallCreatedAt"));
            waiter_call_table_no.setCellValueFactory(new PropertyValueFactory<>("waiterCallTableNo"));
            waiter_call_content.setCellValueFactory(new PropertyValueFactory<>("waiterCallContent"));

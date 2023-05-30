@@ -4,6 +4,8 @@
  */
 package reporting.Controller;
 
+import com.utils.ControllerBase;
+import com.utils.DesktopAlert;
 import com.utils.SceneChanger;
 import com.utils.Session;
 import com.utils.SessionManager;
@@ -31,7 +33,7 @@ import javafx.stage.Stage;
 import reporting.Model.Feedback;
 import systemAccount.Model.Restaurant;
 
-public class FeedbackController implements Initializable {
+public class FeedbackController extends ControllerBase implements Initializable {
     @FXML Region main_container;
     @FXML Text feedback_date_time;
     @FXML Text feedback_session_id;
@@ -52,6 +54,7 @@ public class FeedbackController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String view = location.toString().substring(location.toString().lastIndexOf("/")+1);
+        this.setupMenuRoute();
         if(view.equals("feedbackView.fxml")){
             this.initialize_feedback_view();
         } else if(view.equals("feedbackDetailView.fxml")){
@@ -157,5 +160,18 @@ public class FeedbackController implements Initializable {
         feedback.setFeedbackReply(reply);
         feedback.update_feedback();
         
+    }
+    
+    @Override 
+    public void setupMenuRoute(){
+        if(backMenuItem!=null){
+            backMenuItem.setOnMouseClicked(event -> {
+            try{
+                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/reporting/View/feedbackView.fxml");
+            }  catch (Exception ex) {
+                    DesktopAlert.showError("System error","Fail to change screen",ex);
+            }});
+        }
+        super.setupMenuRoute();
     }
 }

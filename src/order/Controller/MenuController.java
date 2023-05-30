@@ -1,6 +1,7 @@
 
 package order.Controller;
 
+import com.utils.ControllerBase;
 import order.Model.Menu;
 import com.utils.DataFetchService;
 import com.utils.SceneChanger;
@@ -47,7 +48,7 @@ import systemAccount.Model.Restaurant;
  *
  * @author Ricky
  */
-public class MenuController implements Initializable{
+public class MenuController extends ControllerBase implements Initializable{
     @FXML TableView tableView;
     @FXML TableColumn menu_description;
     @FXML TableColumn menu_item_quantity;
@@ -330,33 +331,5 @@ public class MenuController implements Initializable{
         SceneChanger.changeScene((Stage) this.main_container.getScene().getWindow(), returnView);
     }
      
-    public void setupMenuRoute(){
-        if(this.menuMenuItem != null ){
-            this.menuMenuItem.setOnMouseClicked(event -> {
-            try{
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/order/View/menuView.fxml");
-            }   catch (IOException ex) {
-                    Logger.getLogger(CheckInController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
-        if(this.accountMenuItem != null ){
-            this.accountMenuItem.setOnMouseClicked(event -> {
-            try{
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/systemAccount/View/editAccountView.fxml");
-            }   catch (IOException ex) {
-                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
-        if(this.sessionMenuItem != null ){
-            this.sessionMenuItem.setOnMouseClicked(event -> {
-            try{
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/customerAuthentication/View/sessionView.fxml");
-            }   catch (IOException ex) {
-                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
-    }
+    
 }

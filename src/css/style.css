@@ -70,3 +70,9 @@
     -fx-border-color:#000000;
     -fx-margin-top: 20px;
 }
+
+.menu_row{
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color:#000000;
+    -fx-padding:0 10 5 10;
+}

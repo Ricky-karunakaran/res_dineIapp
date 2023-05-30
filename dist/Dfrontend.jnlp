@@ -8,12 +8,13 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Dfrontend.jar" size="578055" download="eager" />
+    <jar href="Dfrontend.jar" size="589872" download="eager" />
     <jar href="lib\google-api-client-2.0.0-sources.jar" size="276476" download="eager" />
     <jar href="lib\google-api-services-gmail-v1-rev20220404-2.0.0-sources.jar" size="2752198" download="eager" />
     <jar href="lib\google-oauth-client-jetty-1.34.1-sources.jar" size="7316" download="eager" />
     <jar href="lib\javax.mail-1.6.2.jar" size="659031" download="eager" />
     <jar href="lib\mysql-connector-java-8.0.30.jar" size="2513563" download="eager" />
+    <jar href="lib\pdfbox-app-3.0.0-alpha3.jar" size="10877250" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="dfrontend.Dfrontend"  name="Dfrontend" />
   <update check="always"/>

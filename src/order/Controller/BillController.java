@@ -4,6 +4,7 @@
  */
 package order.Controller;
 
+import com.utils.ControllerBase;
 import com.utils.SceneChanger;
 import com.utils.Session;
 import com.utils.SessionManager;
@@ -44,7 +45,7 @@ import systemAccount.Model.Restaurant;
  *
  * @author Ricky
  */
-public class BillController implements Initializable {
+public class BillController extends ControllerBase implements Initializable {
     @FXML Region main_container;
     @FXML private Text customer_name;
     @FXML TableView tableView;

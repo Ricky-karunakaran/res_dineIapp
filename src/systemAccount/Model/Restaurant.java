@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import com.utils.Model;
 import java.sql.PreparedStatement;
+import reporting.Model.Sale_Report;
 /**
  *
  * @author Ricky
@@ -167,6 +168,94 @@ public class Restaurant extends Model implements Account {
         } catch (Exception e){
             throw  new Exception("Fail to delete restaurant");
         }
+    }
+    
+    public ArrayList<Sale_Report> generate_sales_report(String dateFrom, String dateTo){
+        String sql =    "SELECT\n" +
+                        "restaurant.restaurant_id,\n" +
+                        "bill_item.bill_item_name,\n" +
+                        "bill_item.bill_item_quantity,\n" +
+                        "bill_item.bill_item_unit_price,\n" +
+                        "bill_item.bill_id,\n" +
+                        "SUM(bill_item.bill_item_quantity) as total_quantity,\n" +
+                        "SUM(bill_item.bill_item_quantity*bill_item.bill_item_unit_price) as total_sales,\n" +
+                        "bill.bill_id,\n" +
+                        "session.session_restaurant_id,\n" +
+                        "session.session_bill_id,\n" +
+                        "user.user_email,\n" +
+                        "user.user_age\n" +
+                        "from restaurant\n" +
+                        "INNER JOIN session on session.session_restaurant_id = restaurant.restaurant_id\n" +
+                        "INNER JOIN bill on bill.bill_id = session.session_bill_id\n" +
+                        "INNER JOIN user on session.session_user_id = user.user_email\n" +
+                        "INNER JOIN bill_item on bill_item.bill_id = bill.bill_id\n" +
+                        "WHERE restaurant.restaurant_email = ? AND session.session_start_time <= ? AND session.session_start_time >= ?\n" +
+                        "GROUP BY bill_item.bill_item_name";
+        ArrayList<Sale_Report> sales = new ArrayList<Sale_Report>();
+        try{
+            Connection con = dbConnection.getDb();
+            PreparedStatement pt= con.prepareStatement(sql);
+            pt.setString(1,this.restaurant_email);
+            pt.setString(2, dateTo);
+            pt.setString(3, dateFrom);
+            ResultSet rs = pt.executeQuery();
+            while(rs.next()){
+                Sale_Report sale= new Sale_Report();
+                System.out.println("GET ! DATA");
+                sale.setItem(rs.getString("bill_item_name"));
+                sale.setQuantity(rs.getString("total_quantity"));
+                sale.setSales(rs.getString("total_sales"));
+                sales.add(sale);
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return sales;
+    }
+    
+    public ArrayList<Sale_Report> generate_specific_sales_report(String dateFrom, String dateTo, int ageFrom, int ageTo){
+        String sql =    "SELECT\n" +
+                        "restaurant.restaurant_id,\n" +
+                        "bill_item.bill_item_name,\n" +
+                        "bill_item.bill_item_quantity,\n" +
+                        "bill_item.bill_item_unit_price,\n" +
+                        "bill_item.bill_id,\n" +
+                        "SUM(bill_item.bill_item_quantity) as total_quantity,\n" +
+                        "SUM(bill_item.bill_item_quantity*bill_item.bill_item_unit_price) as total_sales,\n" +
+                        "bill.bill_id,\n" +
+                        "session.session_restaurant_id,\n" +
+                        "session.session_bill_id,\n" +
+                        "user.user_email,\n" +
+                        "user.user_age\n" +
+                        "from restaurant\n" +
+                        "INNER JOIN session on session.session_restaurant_id = restaurant.restaurant_id\n" +
+                        "INNER JOIN bill on bill.bill_id = session.session_bill_id\n" +
+                        "INNER JOIN user on session.session_user_id = user.user_email\n" +
+                        "INNER JOIN bill_item on bill_item.bill_id = bill.bill_id\n" +
+                        "WHERE restaurant.restaurant_email = ? AND session.session_start_time <= ? AND session.session_start_time >= ? AND user.user_age>=? AND user.user_age<=?\n" +
+                        "GROUP BY bill_item.bill_item_name";
+        ArrayList<Sale_Report> sales = new ArrayList<Sale_Report>();
+        try{
+            Connection con = dbConnection.getDb();
+            PreparedStatement pt= con.prepareStatement(sql);
+            pt.setString(1,this.restaurant_email);
+            pt.setString(2, dateTo);
+            pt.setString(3, dateFrom);
+            pt.setInt(4,ageFrom);
+            pt.setInt(5,ageTo);
+            ResultSet rs = pt.executeQuery();
+            while(rs.next()){
+                Sale_Report sale= new Sale_Report();
+                System.out.println("GET ! DATA");
+                sale.setItem(rs.getString("bill_item_name"));
+                sale.setQuantity(rs.getString("total_quantity"));
+                sale.setSales(rs.getString("total_sales"));
+                sales.add(sale);
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return sales;
     }
     
 }

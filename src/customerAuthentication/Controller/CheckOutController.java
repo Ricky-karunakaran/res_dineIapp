@@ -4,6 +4,7 @@
  */
 package customerAuthentication.Controller;
 
+import com.utils.ControllerBase;
 import com.utils.FileLogger;
 import com.utils.SceneChanger;
 import com.utils.Session;
@@ -42,8 +43,7 @@ import systemAccount.Model.User;
  *
  * @author Ricky
  */
-public class CheckOutController implements Initializable{
-    @FXML Region main_container;
+public class CheckOutController extends ControllerBase implements Initializable{
     @FXML TableView tableView;
     @FXML private Text menuMenuItem;
     @FXML private Text sessionMenuItem;
@@ -125,37 +125,7 @@ public class CheckOutController implements Initializable{
         SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/customerAuthentication/View/sessionView.fxml");
     }
     public void setupMenuRoute(){
-        if(this.menuMenuItem != null ){
-            this.menuMenuItem.setOnMouseClicked(event -> {
-            try{
-                if(order_time_line!=null) { order_time_line.stop();}
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/order/View/menuView.fxml");
-            }   catch (IOException ex) {
-                    Logger.getLogger(CheckInController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
-        if(this.accountMenuItem != null ){
-            this.accountMenuItem.setOnMouseClicked(event -> {
-            try{
-                if(order_time_line!=null) { order_time_line.stop();}
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/systemAccount/View/editAccountView.fxml");
-            }   catch (IOException ex) {
-                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
-        if(this.sessionMenuItem != null ){
-            this.sessionMenuItem.setOnMouseClicked(event -> {
-            try{
-                if(order_time_line!=null) { order_time_line.stop();}
-                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/customerAuthentication/View/sessionView.fxml");
-            }   catch (IOException ex) {
-                FileLogger.logFile(ex.getMessage());
-                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-        }
+        super.setupMenuRoute();
     }
     public void editOrder(){
         order_time_line.stop();
