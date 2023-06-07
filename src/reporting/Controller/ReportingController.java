@@ -209,10 +209,6 @@ public class ReportingController extends ControllerBase implements Initializable
     
     public void setupMenuRoute(){
         super.setupMenuRoute();
-    }
-    
-    @Override
-    public void setupBackRoute(){
         if(backMenuItem!=null){
             backMenuItem.setOnMouseClicked(event -> {
             try{
@@ -222,4 +218,6 @@ public class ReportingController extends ControllerBase implements Initializable
             }});
         }
     }
+    
+        
 }

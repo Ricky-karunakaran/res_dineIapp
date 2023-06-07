@@ -159,7 +159,11 @@ public class FeedbackController extends ControllerBase implements Initializable 
         feedback.get_feedback_by_session_id();
         feedback.setFeedbackReply(reply);
         feedback.update_feedback();
-        
+        try {
+            SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/reporting/View/feedbackView.fxml");
+        } catch (IOException ex) {
+            Logger.getLogger(FeedbackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Override 

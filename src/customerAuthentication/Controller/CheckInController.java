@@ -48,6 +48,8 @@ public class CheckInController extends ControllerBase implements Initializable {
     @FXML TableColumn session_user_name;
     @FXML TableColumn session_status;
     @FXML TableColumn session_detail;
+    @FXML TableColumn session_id;
+    @FXML TableColumn session_start_time;
     
     
     @FXML TableColumn customer_email;
@@ -109,7 +111,8 @@ public class CheckInController extends ControllerBase implements Initializable {
         
         session_user_name.setCellValueFactory(new PropertyValueFactory<>("sessionUserName"));
         session_status.setCellValueFactory(new PropertyValueFactory<>("sessionStatus"));
-        
+        session_id.setCellValueFactory(new PropertyValueFactory<>("sessionId"));
+        session_start_time.setCellValueFactory(new PropertyValueFactory<>("sessionStartTime"));
         session_detail.setCellFactory(param -> {
             TableCell tableCell = new TableCell();
             Button button = new Button("Detail");

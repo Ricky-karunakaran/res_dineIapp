@@ -4,6 +4,10 @@
  */
 package systemAccount.Controller;
 
+import com.utils.BusinessMessage;
+import com.utils.CustomException;
+import com.utils.DesktopAlert;
+import com.utils.FormatVerifier;
 import com.utils.SceneChanger;
 import com.utils.Session;
 import com.utils.SessionManager;
@@ -63,10 +67,7 @@ public class SystemAccountController implements Initializable{
     
     @FXML
     private void register_restaurant() throws IOException  {
-//        Stage secondStage = new Stage();
-//        StackPane secondWindowLayout = new StackPane();
-//        secondStage.setScene(new Scene(secondWindowLayout,250,150));
-//        secondStage.show();
+
         String res_email = restaurant_email.getText();
         String res_name = restaurant_name.getText();
         String res_password = restaurant_password.getText();
@@ -74,6 +75,15 @@ public class SystemAccountController implements Initializable{
         if( res_email.isEmpty() || res_name.isEmpty() || res_password.isEmpty() || res_password_confirm.isEmpty()){
             return;
         }
+        if(!FormatVerifier.isEmail(res_email)){
+            DesktopAlert.showAlert("Invalid Input", "Invalid email format");
+            return;
+        }
+        if(!FormatVerifier.isValidPassword(res_password)){
+            DesktopAlert.showAlert("Invalid Input", "Invalid password format");
+            return;
+        }
+        
         if(!res_password.equals(res_password_confirm)){
 
             Alert a = new Alert(AlertType.ERROR);
@@ -88,14 +98,14 @@ public class SystemAccountController implements Initializable{
             restaurant.setName(res_name);
             try{
                 if(restaurant.register(res_password)){
-
+                    DesktopAlert.showAlert("Registration Successful", "Your account has been registered.");
                     SessionManager session = SessionManager.getInstance();
                     session.createSession();
                     session.getSession().setAttributes("restaurant",restaurant);
-                    SceneChanger.changeScene((Stage)this.mainContainer.getScene().getWindow(), "/customerAuthentication/View/sessionView.fxml");
-                };
-                // restaurant.login(res_password);
-                
+                    SceneChanger.changeScene((Stage)this.mainContainer.getScene().getWindow(), "/systemAccount/View/loginView.fxml");
+                };                
+            } catch (CustomException e){
+                DesktopAlert.showAlert("Account Exist", e.getMessage());
             } catch (Exception e) {
                 Alert a = new Alert(AlertType.ERROR);
                 a.setContentText(e.toString());
@@ -110,7 +120,15 @@ public class SystemAccountController implements Initializable{
         SessionManager sessionManager = SessionManager.getInstance();
         Session session = sessionManager.getSession();
         Restaurant restaurant = (Restaurant) session.getAttributes("restaurant");
-        System.out.println(restaurant.getEmail());
+        
+        String restaurant_name = this.restaurant_name.getText();
+        String restaurant_location = this.restaurant_location.getText();
+        String restaurant_operation_hours = this.restaurant_operation_hours.getText();
+
+        if(restaurant_name.isEmpty()){
+            DesktopAlert.showAlert("Invalid input", "Name cannot be empty");
+            return;
+        }
         restaurant.setName(this.restaurant_name.getText());
         restaurant.setLocation(this.restaurant_location.getText());
         restaurant.setOperationHours(this.restaurant_operation_hours.getText());
@@ -118,7 +136,7 @@ public class SystemAccountController implements Initializable{
             restaurant.edit_info();
             SceneChanger.changeScene((Stage) this.mainContainer.getScene().getWindow(), "/systemAccount/View/editAccountView.fxml");
         } catch (Exception ex) {
-            Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            DesktopAlert.showError("System Error", BusinessMessage.system_error, ex);
         }
     }
     
@@ -130,23 +148,14 @@ public class SystemAccountController implements Initializable{
         Restaurant restaurant = new Restaurant();
         restaurant.setEmail(res_email);
         if(!restaurant.login(res_password)){
-            Alert a = new Alert(AlertType.ERROR);
-            a.setContentText("Login failed. Incorrect email or password");
-            a.setHeaderText("Login Fail");
-            a.show();
+            DesktopAlert.showAlert("Login Fail", "Wrong email or passwrd.");
         } else {
             
             SessionManager session = SessionManager.getInstance();
             session.createSession();
             session.getSession().setAttributes("restaurant",restaurant);
-            System.out.println(restaurant);
             SceneChanger.getHistory();
             SceneChanger.changeScene((Stage)this.mainContainer.getScene().getWindow(), "/customerAuthentication/View/sessionView.fxml");
-//            Parent root = FXMLLoader.load(getClass().getResource("/systemAccount/View/homeView.fxml"));
-//            Scene scene = new Scene(root);
-//            Stage currentStage = (Stage)this.mainContainer.getScene().getWindow();
-//            currentStage.setScene(scene);
-//            currentStage.show();
         }        
         } catch(Exception e) {
             Alert a = new Alert(AlertType.NONE);
@@ -159,12 +168,6 @@ public class SystemAccountController implements Initializable{
     @FXML
     private void login() throws IOException{
 
-//        ((Node)event.getSource()).getScene().setCursor(Cursor.WAIT);
-//        Parent root = FXMLLoader.load(getClass().getResource("/systemAccount/View/registerForm.fxml"));
-//        Scene scene = new Scene(root);
-//        Stage currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        currentStage.setScene(scene);
-//        currentStage.show();
         try{
         String user_email = email.getText();
         String user_password = password.getText();
@@ -177,12 +180,7 @@ public class SystemAccountController implements Initializable{
             a.setHeaderText("Login Fail");
             a.show();
         } else {
-//            SceneChanger.changeScene(stage, user_email);
-//            Parent root = FXMLLoader.load(getClass().getResource("/systemAccount/View/homeView.fxml"));
-//            Scene scene = new Scene(root);
-//            Stage currentStage = (Stage)this.password.getScene().getWindow();
-//            currentStage.setScene(scene);
-//            currentStage.show();
+
         }        
         } catch(Exception e) {
             Alert a = new Alert(AlertType.NONE);
@@ -192,10 +190,6 @@ public class SystemAccountController implements Initializable{
             System.out.println(e);
         }
     }
-    private void test() {
-        System.out.println("Hi");
-    }
-    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String view = location.toString().substring(location.toString().lastIndexOf("/")+1);
@@ -249,7 +243,6 @@ public class SystemAccountController implements Initializable{
             Session session = sessionManager.getSession();
             Restaurant restaurant = (Restaurant) session.getAttributes("restaurant");
             restaurant.refreshData();
-            System.out.println(restaurant.getLocation());
             if(restaurant.getName()!=null) restaurant_name.setText(restaurant.getName());
             if(restaurant.getLocation()!=null) restaurant_location.setText(restaurant.getLocation());
             if(restaurant.getOperationHours()!=null) restaurant_operation_hours.setText(restaurant.getOperationHours());
@@ -257,7 +250,7 @@ public class SystemAccountController implements Initializable{
                 restaurant_name.setEditable(true);
                 restaurant_location.setEditable(true);
                 restaurant_operation_hours.setEditable(true);
-                this.editProfile.setText("Submit");
+                this.editProfile.setText("Update");
                 this.editProfile.setOnAction(eventt->{this.edit_info();});
             });
             

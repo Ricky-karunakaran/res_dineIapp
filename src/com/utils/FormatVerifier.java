@@ -18,4 +18,17 @@ public class FormatVerifier {
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
+    
+    public static boolean isValidPassword(String input){
+        if(input.length()<6){
+            return false;
+        }
+        String regex = ".*[!@#$%^&*(),.?\":{}|<>].*";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        if(!matcher.matches()){
+            return false;
+        }
+        return true;
+    }
 }

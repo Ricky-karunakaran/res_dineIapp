@@ -41,6 +41,7 @@ public class Dine_In_Session {
     public String getSessionBillId() {return this.session_bill_id; }
     public String getSessionUserName() { return this.session_user_name;}
     public String getSessionStatus() { return this.session_status;} 
+    public String getSessionStartTime() { return this.session_start_time;} 
     public Dine_In_Session(){}
     
     public void get_session_by_id(){
@@ -84,6 +85,7 @@ public class Dine_In_Session {
                 session.setSessionId(rs.getString("session_id"));
                 session.setSessionUserName(rs.getString("user_name"));
                 session.setSessionBillId(rs.getString("session_bill_id"));
+                session.setSessionStartTime(rs.getString("session_start_time"));
                 session.setSessionStatus(rs.getString("session_status"));
                 sessionList.add(session);
             }

@@ -4,6 +4,7 @@
  */
 package systemAccount.Model;
 
+import com.utils.CustomException;
 import com.utils.dbConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -73,17 +74,14 @@ public class Restaurant extends Model implements Account {
             Connection con= dbConnection.getDb();
             Statement st=con.createStatement();
             ResultSet rs = st.executeQuery(String.format("SELECT restaurant_email from restaurant WHERE restaurant_email ='%s'",this.restaurant_email));
-            System.out.println(String.format("SELECT restaurant_email from restaurant WHERE restaurant_email ='%s'",this.restaurant_email));
             if(rs.next()){
-                throw new Exception("Account exist");
+                throw new CustomException("The email has been registered");
             } else {
                 st.execute(String.format("Insert into restaurant (restaurant_email, restaurant_name, restaurant_password) Values ('%s','%s','%s')",this.restaurant_email,this.restaurant_name,password));
                 con.close();
             }
-            
             return true;
         } catch (Exception e){
-            System.out.println(e);
             throw e;
 
         }    
@@ -100,7 +98,6 @@ public class Restaurant extends Model implements Account {
                     this.restaurant_location,
                     this.restaurant_operation_hours,
                     this.restaurant_email);
-            System.out.println(command);
             st.execute(command);
             con.close();
         } catch (Exception e){

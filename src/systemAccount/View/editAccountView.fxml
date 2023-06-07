@@ -142,7 +142,7 @@
       </HBox>
    </center>
    <bottom>
-      <Button fx:id="editProfile" alignment="CENTER" maxWidth="207.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="207.0" style="-fx-text-fill: White;" styleClass="action-button" stylesheets="@../../css/style.css" text="Edit Profile" BorderPane.alignment="TOP_CENTER">
+      <Button fx:id="editProfile" alignment="CENTER" maxWidth="207.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="207.0" style="-fx-text-fill: White;" styleClass="action-button" stylesheets="@../../css/style.css" text="Update Profile" BorderPane.alignment="TOP_CENTER">
          <BorderPane.margin>
             <Insets bottom="50.0" />
          </BorderPane.margin>

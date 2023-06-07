@@ -57,6 +57,8 @@
          <children>
             <TableView fx:id="tableView" fixedCellSize="40.0" prefHeight="66.0" prefWidth="562.0">
               <columns>
+                  <TableColumn fx:id="session_start_time" prefWidth="75.0" text="Start Time" />
+                  <TableColumn fx:id="session_id" prefWidth="75.0" text="Session Id" />
                 <TableColumn fx:id="session_user_name" prefWidth="75.0" text="Customer Name" />
                 <TableColumn fx:id="session_status" prefWidth="75.0" text="Status" />
                   <TableColumn fx:id="session_detail" prefWidth="75.0" />
