@@ -307,7 +307,7 @@
             android:gravity="center"
             android:inputType="none"
             android:onClick="save"
-            android:text="Save"
+            android:text="Update"
             android:textAlignment="center"
             android:textColor="#F8F8F8" />
     </FrameLayout>

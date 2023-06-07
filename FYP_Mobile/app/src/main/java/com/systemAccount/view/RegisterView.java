@@ -8,6 +8,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.fyp_mobile.R;
 import com.systemAccount.controller.SystemAccountController;
+import com.utils.Dialog;
 
 public class RegisterView extends AppCompatActivity {
     private SystemAccountController controller;
@@ -33,15 +34,6 @@ public class RegisterView extends AppCompatActivity {
         String strName = name.getText().toString();
         String strAge = age.getText().toString();
         String strPhone = phone_number.getText().toString();
-        if(strEmail.isEmpty()||strPassword.isEmpty()||strName.isEmpty()||strAge.isEmpty()||strPhone.isEmpty()||!strAge.matches("[0-9]+")) {
-            System.out.println(strEmail);
-            System.out.println(strPassword);
-            System.out.println(strName);
-            System.out.println(strAge);
-            System.out.println(strPhone);
-            System.out.println("Validation failed");
-            return;
-        }
         this.controller.register_user(strEmail,strPassword,strName,strAge,strPhone);
     }
 }

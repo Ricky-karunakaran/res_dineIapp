@@ -18,7 +18,7 @@ public class Bill {
 
     public void setBillSessionId(String bill_session_id) { this.bill_session_id = bill_session_id; }
     public void setBillId(String bill_id) { this.bill_id = bill_id; }
-
+    public void setBillAmount (double bill_amount) {this.bill_amount = bill_amount; }
     public String getBillId() {return this.bill_id; }
     public String getBillStatus() { return this.bill_status; }
     public double getBillAmount() { return this.bill_amount; }

@@ -39,5 +39,7 @@ public class WaiterView extends AppCompatActivity {
     public void submitCall(View v){
         EditText content = (EditText)findViewById(R.id.waiterCallReason);
         this.controller.call_waiter(content.getText().toString());
+        Intent intent = new Intent(WaiterView.this, SessionView.class);
+        startActivity(intent);
     }
 }

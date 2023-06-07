@@ -37,8 +37,11 @@ public class VisitHistoryFeedbackView extends AppCompatActivity {
         feedback_restaurant_name.setText(restaurant_name);
         feedback_session_date.setText(visit_date_time);
 
-        String mode= (String) session.getAttributes("feedback_mode");
-        if(mode.equals("edit")){
+        String mode = (String) session.getAttributes("feedback_mode");
+        if(mode==null){
+
+        }
+        else if(mode!=null && mode.equals("edit")){
             try {
                 String content = this.controller.fetch_feedback_content();
                 EditText edit_feedback = (EditText) findViewById(R.id.feedback_input);

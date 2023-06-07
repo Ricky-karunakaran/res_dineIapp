@@ -47,9 +47,13 @@
         <activity android:name="com.order.view.SessionView" android:exported="true" />
         <activity android:name="com.order.view.CartView" android:exported="true" />
         <activity android:name="com.order.view.WaiterView" android:exported="true" />
+        <activity android:name="com.order.view.StripPaymentActivity" android:exported="true" />
+        <activity android:name="com.order.view.PaymentResult" android:exported="true" />
         <activity android:name="com.reporting.view.VisitHistoryView" android:exported="true" />
         <activity android:name="com.reporting.view.VisitHistoryFeedbackView" android:exported="true" />
+        <activity android:name="com.reporting.view.ConsumptionView" android:exported="true" />
         <activity android:name="com.systemAccount.view.ResetPasswordView" android:exported="true" />
+        <activity android:name="com.systemAccount.view.ResetPasswordConfirm" android:exported="true" />
     </application>
 
 </manifest>

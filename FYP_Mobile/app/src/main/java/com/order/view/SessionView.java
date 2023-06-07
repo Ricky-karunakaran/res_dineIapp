@@ -2,6 +2,7 @@ package com.order.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.FocusFinder;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +18,7 @@ import com.example.fyp_mobile.R;
 import com.order.controller.CartController;
 import com.order.controller.MenuController;
 import com.systemAccount.view.ProfileView;
+import com.utils.Dialog;
 
 public class SessionView  extends AppCompatActivity {
     private MenuController controller ;
@@ -38,9 +40,14 @@ public class SessionView  extends AppCompatActivity {
     }
 
     private void initializeSessionRestaurant() {
-        TextView restaurant_name = (TextView) findViewById(R.id.session_restaurant_name);
-        LinearLayout sessionMenuList = (LinearLayout) findViewById(R.id.session_menu_list);
-        this.controller.fetchMenu(restaurant_name, sessionMenuList);
+        try{
+            TextView restaurant_name = (TextView) findViewById(R.id.session_restaurant_name);
+            LinearLayout sessionMenuList = (LinearLayout) findViewById(R.id.session_menu_list);
+            this.controller.fetchMenu(restaurant_name, sessionMenuList);
+        } catch (Exception e ){
+            Dialog.dialog(this,"ERROR",e.getMessage(),false);
+        }
+
     }
 
     private void setupRoute(){
@@ -62,6 +69,15 @@ public class SessionView  extends AppCompatActivity {
             }
         });
 
+        ImageView payment = (ImageView) findViewById(R.id.session_bill_button);
+        payment.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(SessionView.this, StripPaymentActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -74,6 +90,12 @@ public class SessionView  extends AppCompatActivity {
     }
 
     public void to_home(){
+        Intent intent = new Intent(this, HomeView.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed(){
         Intent intent = new Intent(this, HomeView.class);
         startActivity(intent);
     }

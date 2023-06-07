@@ -115,26 +115,6 @@ public class HistoryVisitController {
         }
     }
 
-    public void fetch_user_visit_consumption(){
-        SessionManager sessionManager = SessionManager.getInstance();
-        Session session = sessionManager.getSession();
-        User user = (User) session.getAttributes("user");
-        try{
-            ArrayList<HistoryVisit> histories = user.get_visited_restaurant();
-            for( int i = 0; i < histories.size() ; i++){
-                System.out.println(histories.get(i).getSession().getSessionStartTime());
-                ((VisitHistoryView) this.currentView).add_history_row(
-                        histories.get(i).getSession().getSessionStartTime(),
-                        histories.get(i).getRestaurant().getName(),
-                        histories.get(i).getSession().getSessionId(),
-                        false);
-            }
 
-        } catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-
-
-    }
 
 }

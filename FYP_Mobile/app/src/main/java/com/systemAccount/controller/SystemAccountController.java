@@ -10,6 +10,8 @@ import com.customerAuthentication.model.Dine_In_Session;
 import com.systemAccount.model.Reset_Password_Request;
 import com.systemAccount.model.User;
 import com.customerAuthentication.view.HomeView;
+import com.systemAccount.view.LoginView;
+import com.utils.BusinessMessage;
 import com.utils.CustomException;
 import com.utils.Dialog;
 import com.utils.EmailService;
@@ -30,7 +32,6 @@ public class SystemAccountController {
     }
 
     public void login(String email, String password){
-
         User user = new User(email);
         try{
             if(user.login(password))
@@ -52,48 +53,27 @@ public class SystemAccountController {
                 currentView.startActivity(intent);
             }
         } catch(CustomException e){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this.currentView);
-            builder.setTitle("Login Fail");
-            builder.setMessage(e.getMessage());
-            builder.setCancelable(false); // set whether the dialog is cancelable or not
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.dismiss();
-                    // do something when the positive button is clicked
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    // do something when the negative button is clicked
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            Dialog.dialog(currentView,"Login Fail",e.getMessage(),false);
         } catch (Exception e){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this.currentView);
-            builder.setTitle("System Error");
-            builder.setMessage("This is an error with the system, please try again later");
-            builder.setCancelable(false); // set whether the dialog is cancelable or not
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.dismiss();
-                    // do something when the positive button is clicked
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    // do something when the negative button is clicked
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            System.out.println(e);
+            Dialog.dialog(currentView,"System Error", BusinessMessage.system_error,false);
         }
 
 
     }
 
     public void register_user(String email,String password,String name,String age,String phoneNumber){
+        if(email.isEmpty()||password.isEmpty()||name.isEmpty()||age.isEmpty()||phoneNumber.isEmpty()||!age.matches("[0-9]+")){
+            Dialog.dialog(currentView,"Invalid input","Input cannot be empty",false);
+            return;
+        }
+        if(!FormatVerifier.isValidPassword(password)){
+            Dialog.dialog(currentView,"Invalid input","Invalid password format",false);
+            return;
+        }
+        if(!FormatVerifier.isEmail(email)){
+            Dialog.dialog(currentView,"Invalid input","Invalid email format",false);
+            return;
+        }
         User user = new User(email);
         user.setUserName(name);
         user.setUserAge(Integer.parseInt(age));
@@ -104,21 +84,28 @@ public class SystemAccountController {
                 SessionManager sessionManager = SessionManager.getInstance();
                 Session session = sessionManager.getSession();
                 session.setAttributes("user",user);
-                Intent intent = new Intent(currentView,HomeView.class);
+                Intent intent = new Intent(currentView, LoginView.class);
                 currentView.startActivity(intent);
             }
+        } catch (CustomException e){
+            Dialog.dialog(currentView,"Register Fail.",e.getMessage(),false);
         } catch(Exception e){
-
+            Dialog.dialog(currentView,"System Error",BusinessMessage.system_error,false);
         }
 
     }
 
     public void edit_information(String email, String name, String age, String phoneNumber, String allergy) {
         try{
+            if(name.isEmpty()){
+                Dialog.dialog(currentView,"Invalid input","Input cannot be empty",false);
+                return;
+            }
+            if(!age.matches("[0-9]+")){
+                Dialog.dialog(currentView,"Invalid input","Invalid age",false);
+                return;
+            }
             User user = new User (email);
-            System.out.println(email);
-            System.out.println(name);
-            System.out.println(phoneNumber);
             user.setUserName(name);
             user.setUserAge(Integer.parseInt(age));
             user.setUserPhone(phoneNumber);
@@ -155,6 +142,8 @@ public class SystemAccountController {
     public void send_verification_code(String email){
 
         if(FormatVerifier.isEmail(email)){
+            SessionManager sessionManager = SessionManager.getInstance();
+            sessionManager.getSession().setAttributes("reset_user_email", email);
             Reset_Password_Request reset = new Reset_Password_Request();
             reset.setResetPasswordUserEmail(email);
             reset.add_request();
@@ -174,6 +163,25 @@ public class SystemAccountController {
                     "Invalid email address",
                     "Please enter correct email address",
                     false);
+        }
+    }
+
+    public void reset_password(String code, String password) throws CustomException{
+        try{
+            SessionManager sessionManager = SessionManager.getInstance();
+            Session session = sessionManager.getSession();
+            User user = new User();
+            String email = (String) session.getAttributes("reset_user_email");
+            Reset_Password_Request reset = new Reset_Password_Request();
+            reset.setResetPasswordUserEmail(email);
+            reset.get_request_by_user_email();
+            if(code.equals(reset.getResetPasswordRandomCode())){
+                if(user.reset_password(email,password));
+            } else {
+                throw new CustomException("Verification Code Do Not Match!");
+            }
+        }catch(Exception e){
+
         }
     }
 

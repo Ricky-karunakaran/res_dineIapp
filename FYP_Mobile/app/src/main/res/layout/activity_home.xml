@@ -100,11 +100,11 @@
     <TextView
         android:id="@+id/home_active_session"
         android:layout_width="280dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="TextView"
         android:textColor="#000000"
         android:textStyle="bold"
-        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

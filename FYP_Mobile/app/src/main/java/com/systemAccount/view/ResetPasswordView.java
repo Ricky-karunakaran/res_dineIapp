@@ -1,5 +1,6 @@
 package com.systemAccount.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -27,5 +28,7 @@ public class ResetPasswordView extends AppCompatActivity {
         EditText email = (EditText) findViewById(R.id.email_input);
         System.out.println(email.getText().toString());
         this.controller.send_verification_code(email.getText().toString());
+        Intent intent = new Intent(this, ResetPasswordConfirm.class);
+        startActivity(intent);
     }
 }

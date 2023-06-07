@@ -1,5 +1,7 @@
 package com.example.fyp_mobile;
 
+import com.example.fyp_mobile.config.paypalConfig;
+//import com.paypal.android.sdk.payments.PayPalConfiguration;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 
@@ -16,11 +18,14 @@ import com.utils.Session;
 import com.utils.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
-
+//    private static PayPalConfiguration config = new PayPalConfiguration()
+//            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+//            .clientId(paypalConfig.PAYPAL_CLIENT_ID);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         SessionManager sessionManager = SessionManager.getInstance();
         sessionManager.createSession();
         TextView signIn = (TextView) findViewById(R.id.signInButton);

@@ -13,6 +13,7 @@ import com.customerAuthentication.controller.CheckInController;
 import com.example.fyp_mobile.R;
 import com.order.view.SessionView;
 import com.systemAccount.view.ProfileView;
+import com.utils.Dialog;
 
 public class HomeView extends AppCompatActivity {
     private CheckInController controller ;
@@ -48,7 +49,7 @@ public class HomeView extends AppCompatActivity {
         });
     }
     private void initializeHomeText(){
-
+        try{
         String restaurant_name = controller.checkHasCheckIn();
         TextView home_active_session = findViewById(R.id.home_active_session);
         Button home_to_session_button = findViewById(R.id.home_to_session);
@@ -65,6 +66,9 @@ public class HomeView extends AppCompatActivity {
         } else {
             home_active_session.setText("No Active Session Found");
             home_to_session_button.setVisibility(View.GONE);
+        }
+        } catch(Exception e ){
+            Dialog.dialog(this,"ERROR",e.getMessage(),false);
         }
     }
 

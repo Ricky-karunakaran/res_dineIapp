@@ -66,10 +66,6 @@ public class User implements Account {
     @Override
     public boolean login(String password) throws Exception {
         try{
-//            DbBackgroundTask task = new DbBackgroundTask();
-//            task.setStatement("SELECT * FROM user");
-//            task.execute();
-//            return true;
             Connection con = dbConnection.getDb();
             Statement st = con.createStatement();
             String command = String.format("SELECT * from user where user_email='%s' AND user_password ='%s'",this.user_email,password);
@@ -80,12 +76,13 @@ public class User implements Account {
                 this.user_age = rt.getInt("user_age");
                 this.user_phone_number = rt.getString("user_phone_number");
                 this.user_active_session = rt.getString("user_active_session");
-                System.out.println("Login Success");
+                con.close();
                 return true;
             } else {
-                System.out.println("Login Fail");
+                con.close();
                 throw new CustomException("Wrong Password or email");
             }
+
         } catch (Exception e){
             System.out.println(e.toString());
             throw e;
@@ -114,7 +111,7 @@ public class User implements Account {
                 );
                 st.execute(command);
             }
-
+            con.close();
             return true;
         } catch (Exception e){
             throw e;
@@ -142,6 +139,7 @@ public class User implements Account {
                 );
                 st.execute(command);
             }
+            con.close();
         } catch (Exception e){
             System.out.println(e);
         }
@@ -149,7 +147,17 @@ public class User implements Account {
 
     @Override
     public boolean reset_password(String email, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection con= dbConnection.getDb();
+            String sql = "UPDATE user set user_password = ? WHERE user_email = ? ";
+            PreparedStatement pt = con.prepareStatement(sql);
+            pt.setString(1,password);
+            pt.setString(2, email);
+            pt.executeUpdate();
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
     public boolean check_active_session() throws SQLException, ClassNotFoundException {
@@ -210,11 +218,11 @@ public class User implements Account {
         }
     }
 
-    public ArrayList<HistoryVisit> get_consumption() throws CustomException{
-        ArrayList<HistoryVisit> histories = new ArrayList<HistoryVisit>();
+    public ArrayList<Consumption> get_consumption() throws CustomException{
+        ArrayList<Consumption> consumptions = new ArrayList<Consumption>();
         try{
             Connection con = dbConnection.getDb();
-            String sql = "SELECT user.user_email,restaurant.restaurant_name,session.session_start_time,bill.bill_amount,bill.bill_status from user INNER JOIN session on session.session_user_id = user.user_email INNER JOIN restaurant on restaurant.restaurant_id = session.session_restaurant_id INNER JOIN bill on bill.bill_id = session.session_bill_id WHERE user.user_email = ? AND bill.bill_status = ?";
+            String sql = "SELECT user.user_email,restaurant.restaurant_name,session.session_id,session.session_start_time,bill.bill_amount,bill.bill_status,bill.bill_id from user INNER JOIN session on session.session_user_id = user.user_email INNER JOIN restaurant on restaurant.restaurant_id = session.session_restaurant_id INNER JOIN bill on bill.bill_id = session.session_bill_id WHERE user.user_email = ? AND bill.bill_status = ?";
             PreparedStatement pt = con.prepareStatement(sql);
             pt.setString(1, this.user_email);
             pt.setString(2, "SOLVED");
@@ -224,15 +232,13 @@ public class User implements Account {
                 Consumption consumption = new Consumption();
 
                 consumption.getRestaurant().setName(rs.getString("restaurant.restaurant_name"));
-                consumption.getRestaurant().setRestaurantId(rs.getString("restaurant.restaurant_id"));
-                consumption.getRestaurant().setLocation("restaurant.restaurant_location");
                 consumption.getSession().setSessionId(rs.getString("session.session_id"));
-//                System.out.println(history.getSession().getSessionId());
-//                history.getSession().setSessionStartTime(rs.getString("session.session_start_time"));
-//                histories.add(history);
+                consumption.getSession().setSessionStartTime(rs.getString("session.session_start_time"));
+                consumption.getBill().setBillAmount(rs.getDouble("bill.bill_amount"));
+                consumptions.add(consumption);
 
             }
-            return histories;
+            return consumptions;
         } catch (Exception e ){
             System.out.println(e.getMessage());
             throw new CustomException("Fail to get visit history");

@@ -8,9 +8,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.customerAuthentication.view.CheckInView;
 import com.customerAuthentication.view.HomeView;
 import com.example.fyp_mobile.R;
+import com.reporting.model.Consumption;
 import com.reporting.model.HistoryVisit;
+import com.reporting.view.ConsumptionView;
 import com.reporting.view.VisitHistoryView;
 import com.systemAccount.controller.SystemAccountController;
 import com.systemAccount.model.User;
@@ -58,7 +61,7 @@ public class ProfileView extends AppCompatActivity {
         consumptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfileView.this, EditProfileView.class);
+                Intent intent = new Intent(ProfileView.this, ConsumptionView.class);
                 startActivity(intent);
             }
         });
@@ -73,6 +76,15 @@ public class ProfileView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileView.this, HomeView.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageView checkIn = (ImageView) findViewById(R.id.check_in);
+        checkIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileView.this, CheckInView.class);
                 startActivity(intent);
             }
         });
