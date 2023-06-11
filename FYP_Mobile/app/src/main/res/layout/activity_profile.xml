@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:inputType="none"
-            android:text="Visit History"
+            android:text="History"
             android:textAlignment="center"
             android:textColor="#F8F8F8"
             tools:ignore="TouchTargetSizeCheck" />

@@ -27,7 +27,7 @@ public class CheckOutController {
             Bill bill = new Bill();
             bill.setBillId(bill_id);
             bill.read_bill_by_id();
-            if(bill.getBillStatus().equals("UNSOLVED") && bill.getBillAmount()==0.0) {
+            if(bill.getBillStatus().equals("SOLVED") || bill.getBillAmount()==0.0) {
                 User user = (User) session.getAttributes("user");
                 user.update_active_session(null);
                 ((SessionView) this.currentView).to_home();

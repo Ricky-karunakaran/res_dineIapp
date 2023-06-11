@@ -26,10 +26,12 @@ public class ResetPasswordConfirm extends AppCompatActivity {
     public void reset_password(View v){
         EditText code = findViewById(R.id.code_input);
         EditText newPassword = findViewById(R.id.new_password_input);
+        EditText confirmPassword = findViewById(R.id.confirm_password_input);
         try {
-            this.controller.reset_password(code.getText().toString(), newPassword.getText().toString());
+            this.controller.reset_password(code.getText().toString(), newPassword.getText().toString(),confirmPassword.getText().toString());
         } catch (CustomException e) {
             Dialog.dialog(this,"Reset Password Fail",e.getMessage(),false);
+            return;
         }
         Intent intent = new Intent(this, LoginView.class);
         startActivity(intent);

@@ -4,6 +4,8 @@ import com.utils.dbConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class BillItem {
     private String bill_item_id;
@@ -47,5 +49,32 @@ public class BillItem {
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
+    }
+
+    public ArrayList<BillItem> read_all_bill_item(){
+        ArrayList<BillItem> bill_items = new ArrayList<BillItem>();
+
+        try{
+            String sql = "SELECT * from bill_item Inner join bill on bill_item.bill_id = bill.bill_id Where bill.bill_id = ? AND bill_item.bill_item_quantity != 0 ";
+            Connection con = dbConnection.getDb();
+            PreparedStatement pt = con.prepareStatement(sql);
+            pt.setString(1,this.bill_id);
+            ResultSet rs = pt.executeQuery();
+
+            while(rs.next()){
+                BillItem bill_item = new BillItem();
+                System.out.println(rs.getString("bill_item.bill_item_name"));
+                bill_item.setBillId(rs.getString("bill_id"));
+                bill_item.setBillItemId(rs.getString("bill_item_id"));
+                bill_item.setBillItemName(rs.getString("bill_item_name"));
+                bill_item.setBillItemQuantity(rs.getInt("bill_item_quantity"));
+                bill_item.setBillItemUnitPrice(rs.getDouble("bill_item_unit_price"));
+                bill_items.add(bill_item);
+            }
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return bill_items;
     }
 }

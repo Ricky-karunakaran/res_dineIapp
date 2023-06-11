@@ -3,6 +3,7 @@ package com.order.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,11 @@ public class CartView extends AppCompatActivity {
     private void initializeCartItemList(){
         LinearLayout cartItemList = (LinearLayout) findViewById(R.id.cart_cart_item_list);
         this.controller.fetchCartItem(cartItemList);
+    }
+
+    public void disable_submit_button(){
+        Button button = findViewById(R.id.submit_cart_button);
+        button.setClickable(false);
     }
 
     public void submit_cart(View v){

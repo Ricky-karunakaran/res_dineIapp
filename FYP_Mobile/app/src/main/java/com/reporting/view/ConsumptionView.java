@@ -1,5 +1,6 @@
 package com.reporting.view;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -13,9 +14,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
+import com.customerAuthentication.view.HomeView;
 import com.example.fyp_mobile.R;
 import com.reporting.controller.ConsumptionController;
 import com.reporting.controller.HistoryVisitController;
+import com.systemAccount.view.ProfileView;
 import com.utils.CustomException;
 import com.utils.Dialog;
 import com.utils.JDateTime;
@@ -34,12 +37,22 @@ public class ConsumptionView  extends AppCompatActivity {
         this.controller = new ConsumptionController();
         this.controller.setView(this);
         this.add_consumption_row("Visit Date Time","Restaurant Name","0","Consumption(RM)",true);
-
         this.controller.fetch_user_visit_consumption();
 
     }
     public LinearLayout get_visit_list_layout(){
-        return (LinearLayout) findViewById(R.id.visit_history_list);
+        return (LinearLayout) findViewById(R.id.consumption_list);
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(ConsumptionView.this, ProfileView.class);
+        startActivity(intent);
+    }
+
+    public void backProfileView(View v){
+        Intent intent = new Intent(ConsumptionView.this, ProfileView.class);
+        startActivity(intent);
     }
 
     public void add_consumption_row(String visit_date_time, String visit_restaurant_name,String session_id,String visit_consumption, boolean isTitle){

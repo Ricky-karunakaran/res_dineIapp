@@ -21,6 +21,7 @@ import com.utils.SessionManager;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.text.Format;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -166,8 +167,17 @@ public class SystemAccountController {
         }
     }
 
-    public void reset_password(String code, String password) throws CustomException{
+    public void reset_password(String code, String password, String confirm_password) throws CustomException{
         try{
+            if(password.isEmpty()){
+                throw new CustomException("Input cannot be empty");
+            }
+            if(! password.equals(confirm_password)){
+                throw new CustomException("Unmatched password");
+            }
+            if(!FormatVerifier.isValidPassword(password)){
+                throw new CustomException("Invalid password format");
+            }
             SessionManager sessionManager = SessionManager.getInstance();
             Session session = sessionManager.getSession();
             User user = new User();
@@ -180,8 +190,10 @@ public class SystemAccountController {
             } else {
                 throw new CustomException("Verification Code Do Not Match!");
             }
-        }catch(Exception e){
-
+        } catch(CustomException e){
+            throw new CustomException(e.getMessage());
+        } catch(Exception e){
+            throw new CustomException("System Error");
         }
     }
 

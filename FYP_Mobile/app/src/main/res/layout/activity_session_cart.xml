@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/button_shape"
+
             android:paddingLeft="20dp"
             android:paddingRight="20dp">
 
@@ -61,21 +61,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cart"
+                android:textColor="#000000"
                 android:textSize="25sp" />
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
-
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bill"
-                android:textSize="25sp" />
-        </FrameLayout>
+            android:layout_margin="10dp"/>
 
     </LinearLayout>
 
@@ -83,8 +76,6 @@
         android:id="@+id/scrollView2"
         android:layout_width="408dp"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
@@ -97,7 +88,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/submit_cart_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit Cart"

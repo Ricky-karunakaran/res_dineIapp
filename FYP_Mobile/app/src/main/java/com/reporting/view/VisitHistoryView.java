@@ -174,4 +174,14 @@ public class VisitHistoryView extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, ProfileView.class);
+        startActivity(intent);
+    }
+
+    public void backProfileView(View v){
+        this.onBackPressed();
+    }
 }

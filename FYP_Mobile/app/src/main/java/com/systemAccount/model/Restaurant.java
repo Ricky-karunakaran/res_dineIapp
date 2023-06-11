@@ -68,13 +68,13 @@ public class Restaurant extends Model implements Account {
             if(rt.next()){
                 System.out.println(rt.getString(1));
             } else {
-                throw new CustomException("No Restaurant found");
+                throw new CustomException("No Restaurant can be found.");
             }
         } catch (CustomException e ){
             throw e;
 
         }catch (Exception e){
-            throw new Exception("System error, fail to check restaurant infomation");
+            throw new Exception("System error, fail to check restaurant information.");
         }
     }
 

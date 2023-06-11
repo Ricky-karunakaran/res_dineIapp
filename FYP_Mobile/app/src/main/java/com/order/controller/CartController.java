@@ -85,6 +85,7 @@ public class CartController  {
         ArrayList<CartItem> cart_items = cart.getCartItems();
         System.out.println(cart_id);
         System.out.println(cart_items.size());
+        if(cart_items.size()==0) { ((CartView)this.currentView).disable_submit_button();}
         for(int i=0;i<cart_items.size();i++){
 
             LinearLayout item_linear_layout = new LinearLayout(currentView);

@@ -28,12 +28,10 @@ public class ProfileView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.controller = new SystemAccountController();
         this.controller.setView(this);
-
         setContentView(R.layout.activity_profile);
         this.setupRoute();
         SessionManager sessionManager = SessionManager.getInstance();
         Session session = sessionManager.getSession();
-        System.out.println(session == null);
         User user = (User) session.getAttributes("user");
         TextView user_name = (TextView) findViewById(R.id.profile_user_name);
         System.out.println(user.getUserEmail());

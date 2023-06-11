@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.xml.transform.Result;
 
@@ -15,10 +16,11 @@ public class Bill {
     private double bill_amount;
     private String bill_status;
     private String bill_session_id;
-
+    private ArrayList<BillItem> bill_items;
     public void setBillSessionId(String bill_session_id) { this.bill_session_id = bill_session_id; }
     public void setBillId(String bill_id) { this.bill_id = bill_id; }
     public void setBillAmount (double bill_amount) {this.bill_amount = bill_amount; }
+
     public String getBillId() {return this.bill_id; }
     public String getBillStatus() { return this.bill_status; }
     public double getBillAmount() { return this.bill_amount; }
@@ -65,7 +67,7 @@ public class Bill {
     public void update_amount(double value){
         try{
             Connection con = dbConnection.getDb();
-            String sql = "Update  bill SET bill_amount = bill_amount + ? WHERE bill_id = ? ";
+            String sql = "Update  bill SET bill_status='PENDING', bill_amount = bill_amount + ? WHERE bill_id = ? ";
             PreparedStatement pt = con.prepareStatement(sql);
             pt.setDouble(1, value);
             pt.setString(2, this.bill_id);
@@ -76,5 +78,30 @@ public class Bill {
             e.printStackTrace();
         }
 
+    }
+
+    public void update_status(){
+        try{
+            Connection con = dbConnection.getDb();
+            String sql = "Update  bill SET bill_status='SOLVED' WHERE bill_id = ? ";
+            PreparedStatement pt = con.prepareStatement(sql);
+            pt.setString(1, this.bill_id);
+            pt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public ArrayList<BillItem> getBillItems(){
+        if(this.bill_items == null ){
+            BillItem bill_item = new BillItem();
+            bill_item.setBillId(this.bill_id);
+            this.bill_items = bill_item.read_all_bill_item();
+        }
+
+        return this.bill_items;
     }
 }
