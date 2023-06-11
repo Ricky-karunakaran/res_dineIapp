@@ -4,7 +4,10 @@
  */
 package order.Controller;
 
+import com.utils.BusinessMessage;
 import com.utils.ControllerBase;
+import com.utils.DesktopAlert;
+import com.utils.FormatVerifier;
 import com.utils.SceneChanger;
 import com.utils.SessionManager;
 import java.io.File;
@@ -68,27 +71,35 @@ public class MenuItemController extends ControllerBase implements Initializable 
         }
     }
     public void add_menu_item() throws IOException{
-        SessionManager sessionManager = SessionManager.getInstance();
-        Menu menu = (Menu) sessionManager.getSession().getAttributes("menu_viewing");
+        try{
+            SessionManager sessionManager = SessionManager.getInstance();
+            Menu menu = (Menu) sessionManager.getSession().getAttributes("menu_viewing");
 
-        String menu_item_name = this.menu_item_name_input.getText();
-        String menu_item_description = this.menu_item_description_input.getText();
-        String menu_item_price = this.menu_item_price_input.getText();
-        String menu_item_allergy = this.menu_item_allergy_input.getText();
+            String menu_item_name = this.menu_item_name_input.getText();
+            String menu_item_description = this.menu_item_description_input.getText();
+            String menu_item_price = this.menu_item_price_input.getText();
+            String menu_item_allergy = this.menu_item_allergy_input.getText();
+            if(!FormatVerifier.isValidPrice(menu_item_price)){
+                DesktopAlert.showAlert("Invalid Input", "Price can only contain number.");
+                return;
+            }
+            MenuItem menuItem = new MenuItem();
+
+            menuItem.setMenuId(menu.getMenuId());
+            menuItem.setMenuItemName(menu_item_name);
+            menuItem.setMenuItemDescription(menu_item_description);
+            menuItem.setMenuItemPrice(Double.parseDouble(menu_item_price));
+            menuItem.setMenuItemAllergy(menu_item_allergy);
+            menuItem.setMenuItemImage(file);
+
+            menuItem.add_menu_item();
+            menu.resetMenuItem();
+            sessionManager.getSession().setAttributes("menu_viewing", menu);
+            SceneChanger.changeScene((Stage) this.main_container.getScene().getWindow(), "/order/View/menuDetailView.fxml");
+        } catch (Exception e){
+            DesktopAlert.showError("System Error",BusinessMessage.system_error, e);
+        }
         
-        MenuItem menuItem = new MenuItem();
-        
-        menuItem.setMenuId(menu.getMenuId());
-        menuItem.setMenuItemName(menu_item_name);
-        menuItem.setMenuItemDescription(menu_item_description);
-        menuItem.setMenuItemPrice(Double.parseDouble(menu_item_price));
-        menuItem.setMenuItemAllergy(menu_item_allergy);
-        menuItem.setMenuItemImage(file);
-        
-        menuItem.add_menu_item();
-        menu.resetMenuItem();
-        sessionManager.getSession().setAttributes("menu_viewing", menu);
-        SceneChanger.changeScene((Stage) this.main_container.getScene().getWindow(), "/order/View/menuDetailView.fxml");
     }
     public void edit_menu_item(){
         SessionManager sessionManager = SessionManager.getInstance();

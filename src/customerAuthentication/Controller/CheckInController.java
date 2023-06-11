@@ -147,12 +147,16 @@ public class CheckInController extends ControllerBase implements Initializable {
         
         accept.setCellFactory(param -> {
             TableCell tableCell = new TableCell();
-            Button button = new Button("Accept");
+            Button button = new Button("Approve");
             button.setOnAction(event->{
                 Check_In_Request check_in_request = (Check_In_Request) tableView.getItems().get(tableCell.getIndex());
                 check_in_request.setCheckInRequestStatus("ACCEPTED");
                 check_in_request.update_check_in_request();
                 tableView.getItems().remove(tableCell.getIndex());
+                int numRows = tableView.getItems().size();
+                double rowHeight = tableView.getFixedCellSize();
+                double prefHeight = numRows * (rowHeight + 1.0) + 26.0; // 26.0 is the default table header height
+                tableView.setPrefHeight(prefHeight);
 
             });
             tableCell.setGraphic(button);
@@ -167,16 +171,20 @@ public class CheckInController extends ControllerBase implements Initializable {
                 check_in_request.setCheckInRequestStatus("REJECTED");
                 check_in_request.update_check_in_request();
                 tableView.getItems().remove(tableCell.getIndex());
-                
+                int numRows = tableView.getItems().size();
+                double rowHeight = tableView.getFixedCellSize();
+                double prefHeight = numRows * (rowHeight + 1.0) + 26.0; // 26.0 is the default table header height
+                tableView.setPrefHeight(prefHeight);
                 User user = new User();
                 user.setUserEmail(check_in_request.getCheckInUserEmail());
                 user.check_out_by_email();
+                
+                
             });
             tableCell.setGraphic(button);
             return tableCell;
         });
         tableView.setItems(requests);
-        System.out.println(tableView.getItems().size());
         int numRows = tableView.getItems().size();
         double rowHeight = tableView.getFixedCellSize();
         double prefHeight = numRows * (rowHeight + 1.0) + 26.0; // 26.0 is the default table header height

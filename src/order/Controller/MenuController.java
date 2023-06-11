@@ -4,6 +4,7 @@ package order.Controller;
 import com.utils.ControllerBase;
 import order.Model.Menu;
 import com.utils.DataFetchService;
+import com.utils.DesktopAlert;
 import com.utils.SceneChanger;
 import com.utils.Session;
 import com.utils.SessionManager;
@@ -76,6 +77,10 @@ public class MenuController extends ControllerBase implements Initializable{
         Restaurant restaurant = (Restaurant) sessionManager.getSession().getAttributes("restaurant");
         
         String menuTitle = menu_title_input.getText();
+        if(menuTitle.isEmpty()){
+            DesktopAlert.showAlert("Invalid Input", "Menu Title cannot be empty.");
+            return;
+        }
         Menu menu = new Menu();
         menu.setMenuDescription(menuTitle);
         menu.setMenuRestaurantId(restaurant.getRestaurantId());
@@ -100,6 +105,10 @@ public class MenuController extends ControllerBase implements Initializable{
         SessionManager sessionManager = SessionManager.getInstance();
         Menu menu = (Menu) sessionManager.getSession().getAttributes("menu_viewing");
         String menuTitle = menu_title_input.getText();
+        if(menuTitle.isEmpty()){
+            DesktopAlert.showAlert("Invalid Input", "Menu Title cannot be empty.");
+            return;
+        }
         Menu newMenu = new Menu();
         menu.setMenuDescription(menuTitle);
         try {
@@ -160,9 +169,10 @@ public class MenuController extends ControllerBase implements Initializable{
             Button button = new Button("Delete");
             button.setOnAction(event->{
                 try {
+                    Menu viewing_menu = (Menu) tableView.getItems().get(tableCell.getIndex());
                     Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-                    a.setContentText("Are you sure to delete this menu item?");
-                    a.setHeaderText("Delete Menu Item Confirmation");
+                    a.setContentText("Are you sure to delete menu '"+viewing_menu.getDescription()+"'");
+                    a.setHeaderText("Delete Menu Confirmation");
                     Optional<ButtonType> answer = a.showAndWait();
                     if(answer.get() == ButtonType.OK) {
                         Menu menu = (Menu) tableView.getItems().get(tableCell.getIndex());

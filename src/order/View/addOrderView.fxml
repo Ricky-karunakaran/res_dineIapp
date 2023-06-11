@@ -60,7 +60,7 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body-text" text="Quantity" GridPane.rowIndex="1" />
                   <ChoiceBox fx:id="orderItemSelect" prefHeight="26.0" prefWidth="356.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" />
                   <TextField fx:id="order_item_quantity" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" onAction="#add_order_item" styleClass="action-button" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#add_order_item" styleClass="action-button" text="Add Item" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>

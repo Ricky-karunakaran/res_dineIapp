@@ -18,6 +18,12 @@ public class FormatVerifier {
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
+    public static boolean isValidPrice(String input){
+        String validPrice = "^\\d+(\\.\\d+)?$";
+        Pattern pattern = Pattern.compile(validPrice);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
+    }
     
     public static boolean isValidPassword(String input){
         if(input.length()<6){

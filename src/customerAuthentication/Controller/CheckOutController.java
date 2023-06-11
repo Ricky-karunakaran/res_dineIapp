@@ -14,6 +14,7 @@ import helper.SessionOrderFetchService;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +25,9 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -35,6 +38,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import order.Model.Bill;
 import order.Model.BillItem;
+import order.Model.Menu;
 import systemAccount.Controller.RestaurantAccountController;
 import systemAccount.Controller.SystemAccountController;
 import systemAccount.Model.User;
@@ -119,6 +123,20 @@ public class CheckOutController extends ControllerBase implements Initializable{
         SessionManager sessionManager = SessionManager.getInstance();
         Session session = sessionManager.getSession();
         Dine_In_Session viewing_session = (Dine_In_Session) session.getAttributes("viewing_session");
+        Bill bill = new Bill();
+        bill.setBillId(viewing_session.getSessionBillId());
+        bill.read_bill_by_id();
+        if(bill.getBillStatus().equals("PENDING")){
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+            a.setContentText("Pls make sure the customer has solved the payment before closing the session.");
+            a.setHeaderText("Checking Out Customer");
+            Optional<ButtonType> answer = a.showAndWait();
+            if(answer.get() == ButtonType.OK) {
+            } else{
+                return;
+            }
+        }
+        bill.update_status();
         viewing_session.check_out_session();
         User user = new User();
         user.check_out(viewing_session.getSessionId());

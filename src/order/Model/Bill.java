@@ -55,6 +55,21 @@ public class Bill {
 
     }
     
+    public void update_status(){
+        try{
+            Connection con = dbConnection.getDb();
+            String sql = "Update  bill SET bill_status='SOLVED' WHERE bill_id = ? ";
+            PreparedStatement pt = con.prepareStatement(sql);
+            pt.setString(1, this.bill_id);
+            pt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
     public ArrayList<BillItem> getBillItems(){
         if(this.bill_items == null ){
             BillItem bill_item = new BillItem();

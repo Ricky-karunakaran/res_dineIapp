@@ -48,7 +48,7 @@ public class SystemAccountController implements Initializable{
     
     @FXML private TextField email;
     @FXML private TextField password;
-    
+    @FXML private Text customer_check_in_code;
     @FXML private TextField restaurant_name;
     @FXML private TextField restaurant_email;
     @FXML private TextField restaurant_location;
@@ -243,6 +243,7 @@ public class SystemAccountController implements Initializable{
             Session session = sessionManager.getSession();
             Restaurant restaurant = (Restaurant) session.getAttributes("restaurant");
             restaurant.refreshData();
+            if(restaurant.getRestaurantId()!=null) this.customer_check_in_code.setText(restaurant.getRestaurantId());
             if(restaurant.getName()!=null) restaurant_name.setText(restaurant.getName());
             if(restaurant.getLocation()!=null) restaurant_location.setText(restaurant.getLocation());
             if(restaurant.getOperationHours()!=null) restaurant_operation_hours.setText(restaurant.getOperationHours());

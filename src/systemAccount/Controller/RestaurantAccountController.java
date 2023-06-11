@@ -62,6 +62,7 @@ public class RestaurantAccountController implements Initializable{
     @FXML TextField reset_password_email_input;
     @FXML TextField verification_code_input;
     @FXML TextField reset_password_new_password;
+    @FXML TextField reset_password_confirm_new_password;
     @FXML Button reset_button;
     @FXML Button reset_password_submit;
     public void deleteRestaurant(String email){
@@ -83,12 +84,14 @@ public class RestaurantAccountController implements Initializable{
                 this.reset_button.setVisible(true);
                 this.verification_code_input.setVisible(true);
                 this.reset_password_new_password.setVisible(true);
+                this.reset_password_confirm_new_password.setVisible(true);
                 Alert a = new Alert(Alert.AlertType.INFORMATION);
                 a.setContentText("A verification code has been sent to the email, please check your mail box.");
                 a.setHeaderText("Verification Code Sent");
                 a.show();
                 this.reset_password_email_input.setVisible(false);
                 this.reset_password_submit.setVisible(false);
+                
             } catch (GeneralSecurityException ex) {
                 Logger.getLogger(RestaurantAccountController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -106,6 +109,7 @@ public class RestaurantAccountController implements Initializable{
     public void reset_password(){
         String code = verification_code_input.getText();
         String newPassword = this.reset_password_new_password.getText();
+        String confirmNewPassowrd = this.reset_password_confirm_new_password.getText();
         String email = this.reset_password_email_input.getText();
         try{
             Reset_Password_Request reset = new Reset_Password_Request();
@@ -113,6 +117,8 @@ public class RestaurantAccountController implements Initializable{
             reset.get_request_by_user_email();
             if(!code.equals(reset.getResetPasswordRandomCode())){ throw new CustomException("Verification code not match");}
             if(newPassword.isEmpty()){ throw new CustomException("New password is empty"); }
+            if(!confirmNewPassowrd.equals(newPassword)){ throw new CustomException("Unmatched password"); }
+            if(!FormatVerifier.isValidPassword(newPassword)) { throw new CustomException("Invalid password format");}
             Restaurant restaurant = new Restaurant();
             if(restaurant.reset_password( email, newPassword)) {
                 Alert a = new Alert(Alert.AlertType.INFORMATION);
@@ -182,10 +188,6 @@ public class RestaurantAccountController implements Initializable{
                 } catch (IOException ex) {
                     Logger.getLogger(RestaurantAccountController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println(restaurant.getEmail());
-                System.out.println(restaurant.getName());
-                System.out.println(restaurant.getLocation());
-                System.out.println(restaurant.getOperationHours());
                 
             });
             tableCell.setGraphic(button);
