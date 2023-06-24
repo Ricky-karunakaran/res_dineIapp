@@ -14,7 +14,7 @@ import com.order.controller.SessionController;
 import com.order.controller.WaiterCallController;
 import com.utils.ControllerBase;
 
-
+//Call Waiter Form
 public class WaiterView extends AppCompatActivity {
     private WaiterCallController controller ;
     @Override

@@ -13,6 +13,7 @@ import com.order.view.SessionView;
 import com.systemAccount.model.Restaurant;
 import com.systemAccount.model.User;
 import com.utils.CustomException;
+import com.utils.JDateTime;
 import com.utils.Session;
 import com.utils.SessionManager;
 
@@ -53,12 +54,8 @@ public class CheckInController {
                     check_in_request.setCheckInRestaurantId(restaurant);
                     check_in_request.setCheckInUserEmail(user.getUserEmail());
 
-                    Date date = Calendar.getInstance().getTime();
-                    TimeZone gmt8TimeZone = TimeZone.getTimeZone("GMT+8");
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                    dateFormat.setTimeZone(gmt8TimeZone);
-                    String strDate = dateFormat.format(date);
-                    check_in_request.setCheckInRequestDateTime(strDate);
+
+                    check_in_request.setCheckInRequestDateTime(JDateTime.getCurrentDateTime());
 
                     check_in_request.create_check_in_request();
                     // update user active session

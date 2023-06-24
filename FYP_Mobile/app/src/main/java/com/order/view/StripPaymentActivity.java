@@ -45,7 +45,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+//BillForm
 public class StripPaymentActivity extends AppCompatActivity {
     PaymentController paymentController;
     BillController billController;

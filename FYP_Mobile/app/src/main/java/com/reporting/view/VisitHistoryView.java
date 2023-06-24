@@ -31,7 +31,7 @@ import com.utils.SessionManager;
 
 import java.util.Calendar;
 import java.util.Date;
-
+//HistoryVisitWindow
 public class VisitHistoryView extends AppCompatActivity {
     private HistoryVisitController controller;
 

@@ -36,7 +36,7 @@ public class MenuController {
     public void setView(AppCompatActivity v) {
         this.currentView  = v;
     }
-
+    //fetch session restaurant menu
     public void fetchMenu(TextView restaurant_name, LinearLayout linear_layour) {
 
         SessionManager sessionManager = SessionManager.getInstance();

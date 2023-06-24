@@ -17,7 +17,7 @@ public class CheckOutController {
     public void setView(AppCompatActivity v) {
         this.currentView  = v;
     }
-
+    // check out session
     public void isBillSolved(){
         SessionManager sessionManager = SessionManager.getInstance();
         Session session = sessionManager.getSession();

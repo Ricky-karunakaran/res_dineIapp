@@ -130,4 +130,7 @@ public class Dine_In_Session {
             e.printStackTrace();
         }
     }
+
+    private void create_cart(){}
+    private void create_bill(){}
 }
