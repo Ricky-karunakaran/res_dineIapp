@@ -75,6 +75,7 @@ public class CheckOutController extends ControllerBase implements Initializable{
         
     }
     
+    //fetch session
     public void initialize_session_detail(){
         SessionManager sessionManager = SessionManager.getInstance();
         Session session = sessionManager.getSession();
@@ -119,6 +120,7 @@ public class CheckOutController extends ControllerBase implements Initializable{
         
     }
     
+    // check out user session
     public void checkOut() throws IOException{
         SessionManager sessionManager = SessionManager.getInstance();
         Session session = sessionManager.getSession();
@@ -142,9 +144,11 @@ public class CheckOutController extends ControllerBase implements Initializable{
         user.check_out(viewing_session.getSessionId());
         SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/customerAuthentication/View/sessionView.fxml");
     }
+    
     public void setupMenuRoute(){
         super.setupMenuRoute();
     }
+    // edit order
     public void editOrder(){
         order_time_line.stop();
          try {

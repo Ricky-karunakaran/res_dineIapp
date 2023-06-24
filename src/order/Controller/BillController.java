@@ -71,7 +71,7 @@ public class BillController extends ControllerBase implements Initializable {
             this.initialize_add_order_view();
         }
     }
-    
+    // fetch session bill
     public void initialize_session_detail_edit(){
         SessionManager sessionManager = SessionManager.getInstance();
         Session session = sessionManager.getSession();

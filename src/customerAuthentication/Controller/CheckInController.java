@@ -11,7 +11,6 @@ import com.utils.SessionManager;
 import customerAuthentication.Model.Check_In_Request;
 import customerAuthentication.Model.Dine_In_Session;
 import helper.SessionDataFetchService;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -29,13 +28,9 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import systemAccount.Controller.RestaurantAccountController;
-import systemAccount.Controller.SystemAccountController;
 import systemAccount.Model.Restaurant;
 import systemAccount.Model.User;
 
@@ -75,7 +70,8 @@ public class CheckInController extends ControllerBase implements Initializable {
         
 
     }
-
+    
+    // fetch session list
     public void initialize_home_view(){
         SessionManager sessionManager = SessionManager.getInstance();
         Session session = sessionManager.getSession();
@@ -132,6 +128,7 @@ public class CheckInController extends ControllerBase implements Initializable {
         
     }
     
+    // fetch check_in_request
     public void initialize_check_in_request_view(){
         SessionManager sessionManager = SessionManager.getInstance();
         Session session = sessionManager.getSession();

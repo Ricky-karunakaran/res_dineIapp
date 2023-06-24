@@ -119,6 +119,7 @@ public class MenuController extends ControllerBase implements Initializable{
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    // fetch menu
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String view = location.toString().substring(location.toString().lastIndexOf("/")+1);
@@ -193,7 +194,7 @@ public class MenuController extends ControllerBase implements Initializable{
         });
         }
     }
-    
+    // fetch restaurant menu 
     private void initialize_menu_detail(){
         SessionManager sessionManager = SessionManager.getInstance();
         Menu menu = (Menu) sessionManager.getSession().getAttributes("menu_viewing");
@@ -309,7 +310,7 @@ public class MenuController extends ControllerBase implements Initializable{
         }
         
     }
-    
+    // fetch menu
     private void initialize_menu_edit(){
         SessionManager sessionManager = SessionManager.getInstance();
         Menu menu = (Menu) sessionManager.getSession().getAttributes("menu_viewing");

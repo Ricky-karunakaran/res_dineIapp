@@ -190,6 +190,8 @@ public class SystemAccountController implements Initializable{
             System.out.println(e);
         }
     }
+    
+    //fetch restaurant
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String view = location.toString().substring(location.toString().lastIndexOf("/")+1);

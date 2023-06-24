@@ -142,6 +142,8 @@ public class RestaurantAccountController implements Initializable{
         
         
     }
+    
+    // fetch_restaurant_list, fetch_restaurant
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String view = location.toString().substring(location.toString().lastIndexOf("/")+1);

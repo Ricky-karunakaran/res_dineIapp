@@ -16,6 +16,8 @@ public class Bill {
     private String bill_status;
     private String bill_session_id;
     private ArrayList<BillItem> bill_items;
+
+    
     public void setBillSessionId(String bill_session_id) { this.bill_session_id = bill_session_id; }
     public void setBillId(String bill_id) { this.bill_id = bill_id; }
 

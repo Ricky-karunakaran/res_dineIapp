@@ -75,4 +75,13 @@
     -fx-border-width: 0 0 1 0;
     -fx-border-color:#000000;
     -fx-padding:0 10 5 10;
+    -fx-background-color: black;
+    -fx-fill:white;
+}
+.menu_row_item{
+    -fx-fill:white;
+    -fx-padding:5px;
+}
+.menu_row_grid{
+    -fx-padding:10px 0 10px 0;
 }
