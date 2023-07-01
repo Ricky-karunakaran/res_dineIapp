@@ -1,5 +1,5 @@
-<!--CheckInWindow-->
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane fx:id="main_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customerAuthentication.Controller.CheckInController">
-<top>
+    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="600.0" styleClass="menu_row" stylesheets="@../../css/style.css" BorderPane.alignment="CENTER_LEFT">
          <children>
             <GridPane>

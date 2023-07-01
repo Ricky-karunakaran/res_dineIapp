@@ -40,6 +40,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javax.imageio.ImageIO;
 
 import systemAccount.Controller.SystemAccountController;
@@ -55,6 +56,7 @@ public class MenuController extends ControllerBase implements Initializable{
     @FXML TableColumn menu_item_quantity;
     @FXML TableColumn menu_detail_cell;
     @FXML TableColumn menu_delete_cell;
+    @FXML TableColumn menu_no;
     @FXML Region main_container;
     
     @FXML Text edit_menu_description;
@@ -142,12 +144,27 @@ public class MenuController extends ControllerBase implements Initializable{
             menu_description.setCellValueFactory(new PropertyValueFactory<>("description"));
             menu_item_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
-            tableView.setItems(menuList);
-            int numRows = tableView.getItems().size();
-            double rowHeight = tableView.getFixedCellSize();
-            double prefHeight = numRows * (rowHeight + 1.0) + 26.0; // 26.0 is the default table header height
-            tableView.setPrefHeight(prefHeight);
             
+            menu_no.setCellFactory(new Callback<TableColumn<String, String>, TableCell<String, String>>() {
+            private int rowIndex = 1;
+
+            @Override
+            public TableCell<String, String> call(TableColumn<String, String> param) {
+                return new TableCell<String, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (!empty) {
+                            setText(String.valueOf(rowIndex));
+                            rowIndex++;
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+            }
+        });
             menu_detail_cell.setCellFactory(param -> {
             TableCell tableCell = new TableCell();
             Button button = new Button("Edit");
@@ -192,6 +209,11 @@ public class MenuController extends ControllerBase implements Initializable{
             tableCell.setGraphic(button);
             return tableCell;
         });
+        tableView.setItems(menuList);
+            int numRows = tableView.getItems().size();
+            double rowHeight = tableView.getFixedCellSize();
+            double prefHeight = numRows * (rowHeight + 1.0) + 26.0; // 26.0 is the default table header height
+            tableView.setPrefHeight(prefHeight);
         }
     }
     // fetch restaurant menu 

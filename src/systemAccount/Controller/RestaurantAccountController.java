@@ -23,6 +23,7 @@ import javafx.util.Duration;
 import systemAccount.Model.Restaurant;
 import com.utils.ActionCell;
 import com.utils.CustomException;
+import com.utils.DesktopAlert;
 import com.utils.FormatVerifier;
 import com.utils.SceneChanger;
 import com.utils.Session;
@@ -38,6 +39,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import systemAccount.Model.Model;
@@ -58,13 +60,14 @@ public class RestaurantAccountController implements Initializable{
     @FXML Text detail_name;
     @FXML Text detail_location;
     @FXML Text detail_operation_hour;
-    
+    @FXML protected Region main_container;
     @FXML TextField reset_password_email_input;
     @FXML TextField verification_code_input;
     @FXML TextField reset_password_new_password;
     @FXML TextField reset_password_confirm_new_password;
     @FXML Button reset_button;
     @FXML Button reset_password_submit;
+    @FXML protected Text backMenuItem;
     public void deleteRestaurant(String email){
         
     }
@@ -147,6 +150,14 @@ public class RestaurantAccountController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String view = location.toString().substring(location.toString().lastIndexOf("/")+1);
+        if(backMenuItem!=null){
+            backMenuItem.setOnMouseClicked(event -> {
+            try{
+                SceneChanger.changeScene((Stage)this.main_container.getScene().getWindow(), "/dfrontend/applicationView.fxml");
+            }  catch (Exception ex) {
+                    DesktopAlert.showError("System error","Fail to change screen",ex);
+            }});
+        }
         if(tableView != null) {
             DataFetchService dataFetchService = new DataFetchService();
             ObservableList<Restaurant> restaurantList = FXCollections.observableArrayList(Restaurant.getAll());

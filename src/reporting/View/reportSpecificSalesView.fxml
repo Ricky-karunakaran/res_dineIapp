@@ -23,7 +23,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text fx:id="backMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Back" />
+                  <Text fx:id="backMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Back" styleClass="menu_row_item"/>
                </children>
             </GridPane>
          </children>
