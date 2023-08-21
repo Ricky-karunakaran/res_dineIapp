@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package customerAuthentication.Model;
 
 import com.utils.dbConnection;
@@ -10,10 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-/**
- *
- * @author Ricky
- */
+
 public class Dine_In_Session {
     private String session_id;
     private String session_status;
@@ -24,6 +18,7 @@ public class Dine_In_Session {
     private String session_restaurant_id;
     private String session_cart_id;
     private String session_bill_id;
+    private String session_table_id;
 
     private String session_user_name;
 
@@ -34,6 +29,7 @@ public class Dine_In_Session {
     public void setSessionUserEmail(String session_user_email) { this.session_user_email = session_user_email; }
     public void setSessionUserName(String session_user_name) { this.session_user_name = session_user_name;}
     public void setSessionBillId(String session_bill_id) { this.session_bill_id = session_bill_id; }
+    public void setSessionTableId(String session_table_id) { this.session_table_id = session_table_id;}
     
     public String getSessionId() { return this.session_id; }
     public String getSessionRestaurantId() { return this.session_restaurant_id; }
@@ -41,7 +37,8 @@ public class Dine_In_Session {
     public String getSessionBillId() {return this.session_bill_id; }
     public String getSessionUserName() { return this.session_user_name;}
     public String getSessionStatus() { return this.session_status;} 
-    public String getSessionStartTime() { return this.session_start_time;} 
+    public String getSessionStartTime() { return this.session_start_time;}
+    public String getSessionTableId() { return this.session_table_id;} 
     public Dine_In_Session(){}
     
     public void get_session_by_id(){
@@ -56,6 +53,7 @@ public class Dine_In_Session {
                 this.setSessionUserName(rs.getString("user_name"));
                 this.setSessionBillId(rs.getString("session_bill_id"));
                 this.setSessionStatus(rs.getString("session_status"));
+                this.setSessionTableId(rs.getString("session_table_id"));
             }
             con.close();
         } catch(Exception e){
@@ -87,6 +85,7 @@ public class Dine_In_Session {
                 session.setSessionBillId(rs.getString("session_bill_id"));
                 session.setSessionStartTime(rs.getString("session_start_time"));
                 session.setSessionStatus(rs.getString("session_status"));
+                session.setSessionTableId(rs.getString("session_table_id"));
                 sessionList.add(session);
             }
             con.close();

@@ -7,7 +7,7 @@
        <fx:deploy width="${javafx.run.width}" height="${javafx.run.height}" 
                   nativeBundles="all"
                   outdir="${basedir}/${dist.dir}" outfile="${application.title}">
-          <fx:application name="${application.title}" 
+          <fx:application name="FoodVerse Alpha" 
                           mainClass="${javafx.main.class}">
           
           </fx:application>

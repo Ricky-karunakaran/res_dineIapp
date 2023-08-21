@@ -128,7 +128,7 @@ public class CheckOutController extends ControllerBase implements Initializable{
         Bill bill = new Bill();
         bill.setBillId(viewing_session.getSessionBillId());
         bill.read_bill_by_id();
-        if(bill.getBillStatus().equals("PENDING")){
+        if(bill.getBillStatus().equals("UNSOLVED")){
             Alert a = new Alert(Alert.AlertType.CONFIRMATION);
             a.setContentText("Pls make sure the customer has solved the payment before closing the session.");
             a.setHeaderText("Checking Out Customer");

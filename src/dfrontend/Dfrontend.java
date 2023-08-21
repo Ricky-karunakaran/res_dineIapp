@@ -16,7 +16,6 @@ public class Dfrontend extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-//        String mode = "Admin";
         String mode = "Restaurant";
         Parent root;
         if(mode.equals("Admin")){root = FXMLLoader.load(getClass().getResource("adminApplicationView.fxml")); }
@@ -28,10 +27,6 @@ public class Dfrontend extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         launch(args);
     }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--ReplyFeedbackForm-->
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
@@ -15,7 +17,7 @@
     <top>
       <HBox fx:id="menu_row" alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="600.0" styleClass="menu_row" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <GridPane>
+            <GridPane styleClass="menu_row_item">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -23,7 +25,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text fx:id="backMenuItem" strokeType="OUTSIDE" strokeWidth="0.0" text="Back" />
+                  <Text fx:id="backMenuItem" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Back" />
                </children>
             </GridPane>
          </children>
@@ -92,7 +94,7 @@
             </GridPane>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button onAction="#save" mnemonicParsing="false" styleClass="action-button" text="Submit" />
+                  <Button mnemonicParsing="false" onAction="#save" styleClass="action-button" text="Submit" />
                </children>
             </HBox>
          </children>

@@ -44,22 +44,10 @@ public class SceneChanger {
         currentStage.show();
         
     }
-    
+
     public void addScene(String fxmlFile){
         SceneChanger.getInstance().getRouteHistory().push(fxmlFile);
     }
-//    public static void backToPrevious(Stage currentStage) throws IOException{
-//        String fxmlFile = SceneChanger.backScene();
-//        Parent root = FXMLLoader.load(SceneChanger.class.getResource(fxmlFile));
-//        SceneChanger.addScene(fxmlFile);
-//        Scene scene = new Scene(root,WindowSize.getScreenWidth(),WindowSize.getScreenHeight());
-//        currentStage.setScene(scene);
-//        currentStage.show();
-//    }
-//    public static String backScene(){
-//        return SceneChanger.stackScene.pop();
-//    }
-    
     public static void getHistory(){
         System.out.println(getInstance().routeHistory.toString());
     }

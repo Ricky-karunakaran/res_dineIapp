@@ -70,4 +70,24 @@ public class Check_In_Request {
             FileLogger.logFile(e.getMessage());
         }
     }
+    public void close_check_in_request(){
+        try{
+            Connection con = dbConnection.getDb();
+            String sql = "SELECT * FROM check_in_request WHERE check_in_user_email = ? ORDER BY check_in_request_date_time DESC LIMIT 1";
+            PreparedStatement pt = con.prepareStatement(sql);
+            pt.setString(1, this.check_in_user_email);
+            ResultSet rs = pt.executeQuery();
+            if(rs.next()){
+                this.check_in_request_id = rs.getString("check_in_request_id");
+                sql = "Update check_in_request Set check_in_request_status = 'COMPLETED' WHERE check_in_request_id = ?";
+                pt = con.prepareStatement(sql);
+                pt.setString(1,this.check_in_request_id);
+                pt.executeUpdate();
+            }
+
+            con.close();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 }

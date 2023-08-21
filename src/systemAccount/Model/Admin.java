@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package systemAccount.Model;
 
 import com.utils.dbConnection;
@@ -9,10 +6,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-/**
- *
- * @author Ricky
- */
 public class Admin  {
     private String admin_email;
     private String admin_password;

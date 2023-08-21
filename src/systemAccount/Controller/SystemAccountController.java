@@ -58,6 +58,7 @@ public class SystemAccountController implements Initializable{
     
     @FXML private Button loginButton;
     @FXML private Button editProfile;
+    @FXML private Button logOutBut;
     @FXML private MenuItem backMenuItem;
     @FXML private ImageView backGround;
     
@@ -72,7 +73,9 @@ public class SystemAccountController implements Initializable{
         String res_name = restaurant_name.getText();
         String res_password = restaurant_password.getText();
         String res_password_confirm = restaurant_password_confirm.getText();
+        // Form Validation
         if( res_email.isEmpty() || res_name.isEmpty() || res_password.isEmpty() || res_password_confirm.isEmpty()){
+            DesktopAlert.showAlert("Invalid Input", "Input cannot be empty");
             return;
         }
         if(!FormatVerifier.isEmail(res_email)){
@@ -85,14 +88,9 @@ public class SystemAccountController implements Initializable{
         }
         
         if(!res_password.equals(res_password_confirm)){
-
-            Alert a = new Alert(AlertType.ERROR);
-            a.setContentText("Passowrd unmatched.");
-            a.setHeaderText("Password unmatched");
-            a.show();
+            DesktopAlert.showAlert("Password Unmathced", "Password unmatched");
 
         } else {
-
             Restaurant restaurant = new Restaurant ();
             restaurant.setEmail(res_email);
             restaurant.setName(res_name);
@@ -187,7 +185,6 @@ public class SystemAccountController implements Initializable{
             a.setAlertType(AlertType.ERROR);
             a.setContentText(e.toString());
             a.show();
-            System.out.println(e);
         }
     }
     
@@ -255,6 +252,13 @@ public class SystemAccountController implements Initializable{
                 restaurant_operation_hours.setEditable(true);
                 this.editProfile.setText("Update");
                 this.editProfile.setOnAction(eventt->{this.edit_info();});
+            });
+            this.logOutBut.setOnAction(event->{
+                try {
+                    SceneChanger.changeScene((Stage)this.mainContainer.getScene().getWindow(), "/dfrontend/applicationView.fxml");
+                } catch (IOException ex) {
+                    Logger.getLogger(SystemAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             });
             
         }

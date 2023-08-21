@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package customerAuthentication.Controller;
 
 import com.utils.ControllerBase;
@@ -106,7 +103,7 @@ public class CheckInController extends ControllerBase implements Initializable {
         tableView.setPrefHeight(prefHeight);
         
         session_user_name.setCellValueFactory(new PropertyValueFactory<>("sessionUserName"));
-        session_status.setCellValueFactory(new PropertyValueFactory<>("sessionStatus"));
+        session_status.setCellValueFactory(new PropertyValueFactory<>("sessionTableId"));
         session_id.setCellValueFactory(new PropertyValueFactory<>("sessionId"));
         session_start_time.setCellValueFactory(new PropertyValueFactory<>("sessionStartTime"));
         session_detail.setCellFactory(param -> {
@@ -175,6 +172,8 @@ public class CheckInController extends ControllerBase implements Initializable {
                 User user = new User();
                 user.setUserEmail(check_in_request.getCheckInUserEmail());
                 user.check_out_by_email();
+                
+                
                 
                 
             });

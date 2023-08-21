@@ -4,8 +4,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-// https://developers.google.com/api-client-library/java
-// https://developers.google.com/gmail/api/quickstart/java
+
 public class EmailService {
   
     public void sendEmail(String receiver, String title, String content) throws GeneralSecurityException, IOException {

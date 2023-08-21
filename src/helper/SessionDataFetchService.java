@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package helper;
 
 import customerAuthentication.Model.Dine_In_Session;
@@ -10,10 +7,6 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import systemAccount.Model.Restaurant;
 
-/**
- *
- * @author Ricky
- */
 public class SessionDataFetchService extends Service<ArrayList<Dine_In_Session>> {
     private String restaurant_id;
     public SessionDataFetchService(String restaurant_id){

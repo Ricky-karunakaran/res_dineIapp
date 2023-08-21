@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package systemAccount.Model;
 
 import com.utils.CustomException;
@@ -12,10 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Random;
 
-/**
- *
- * @author Ricky
- */
 public class Reset_Password_Request {
     private String reset_password_id ;
     private String reset_password_user_email;

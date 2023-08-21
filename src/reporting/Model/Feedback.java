@@ -23,7 +23,7 @@ public class Feedback {
     public void setFeedbackReply (String feedback_reply) { this.feedback_reply = feedback_reply;}
     public void setFeedbackSessionId(String feedback_session_id) { this.feedback_session_id =feedback_session_id; }
     public void setFeedbackUserName(String feedback_user_name) { this.feedback_user_name = feedback_user_name; }
-    
+    public void setFeedbackDateTime(String feedback_date_time) {this.feedback_date_time = feedback_date_time;}
     public String getFeedbackId() { return this.feedback_id; }
     public String getFeedbackContent() { return this.feedback_content; }
     public String getFeedbackReply() { return this.feedback_reply; }
@@ -71,6 +71,7 @@ public class Feedback {
                 this.feedback_id=rs.getString("feedback_id");
                 this.feedback_content = rs.getString("feedback_content");
                 this.feedback_reply = rs.getString("feedback_reply");
+                
             }
         }catch(Exception e){
 
@@ -91,6 +92,7 @@ public class Feedback {
                 feedback.setFeedbackContent(rs.getString("feedback_content"));
                 feedback.setFeedbackReply(rs.getString("feedback_reply"));
                 feedback.setFeedbackSessionId(rs.getString("feedback_session_id"));
+                feedback.setFeedbackDateTime(rs.getString("feedback_date_time"));
                 feedback.setFeedbackUserName(rs.getString("user.user_name"));
                 feedbacks.add(feedback);
             }

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package systemAccount.Model;
 
 import com.utils.dbConnection;
@@ -10,10 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-/**
- *
- * @author Ricky
- */
+
 public class User implements Account {
     private String user_email;
     private String user_name;

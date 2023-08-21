@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package systemAccount.Model;
 
 import com.utils.CustomException;
@@ -13,10 +10,7 @@ import java.util.ArrayList;
 import com.utils.Model;
 import java.sql.PreparedStatement;
 import reporting.Model.Sale_Report;
-/**
- *
- * @author Ricky
- */
+
 public class Restaurant extends Model implements Account {
     private String restaurant_email;
     private String restaurant_name;
@@ -55,6 +49,7 @@ public class Restaurant extends Model implements Account {
                 this.restaurant_name = rt.getString("restaurant_name");
                 this.restaurant_location = rt.getString("restaurant_location");
                 this.restaurant_operation_hours = rt.getString("restaurant_operation_hours");
+                con.close();
                 System.out.println(this.restaurant_id);
                 System.out.println("Login Success");
                 return true;
@@ -75,6 +70,7 @@ public class Restaurant extends Model implements Account {
             Statement st=con.createStatement();
             ResultSet rs = st.executeQuery(String.format("SELECT restaurant_email from restaurant WHERE restaurant_email ='%s'",this.restaurant_email));
             if(rs.next()){
+                con.close();
                 throw new CustomException("The email has been registered");
             } else {
                 st.execute(String.format("Insert into restaurant (restaurant_email, restaurant_name, restaurant_password) Values ('%s','%s','%s')",this.restaurant_email,this.restaurant_name,password));
@@ -114,6 +110,7 @@ public class Restaurant extends Model implements Account {
             pt.setString(1, password);
             pt.setString(2, email);
             pt.execute();
+            con.close();
             return true;
         } catch (Exception e){
             
@@ -131,6 +128,7 @@ public class Restaurant extends Model implements Account {
                 this.restaurant_name = rt.getString("restaurant_name");
                 this.restaurant_location = rt.getString("restaurant_location");
                 this.restaurant_operation_hours = rt.getString("restaurant_operation_hours").replaceAll(",", "\n");
+                con.close();
             }
         } catch (Exception e){
         }

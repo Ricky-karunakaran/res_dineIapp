@@ -4,15 +4,11 @@
  */
 package com.utils;
 
-import customerAuthentication.Controller.CheckInController;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import systemAccount.Controller.SystemAccountController;
 
 /**
  *
