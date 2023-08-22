@@ -23,6 +23,7 @@ public class Dine_In_Session {
     private String session_restaurant_id;
     private String session_cart_id;
     private String session_bill_id;
+    private String session_table_id;
 
 
 
@@ -30,23 +31,25 @@ public class Dine_In_Session {
     public void setSessionStartTime(String session_start_time) {this.session_start_time = session_start_time; }
     public void setSessionEndTime(String session_end_time) { this.session_end_time = session_end_time; }
     public void setSessionId(String session_id) { this.session_id = session_id; }
+    public void setSessionTableId(String session_table_id) { this.session_table_id = session_table_id; }
 
     public String getSessionId() { return this.session_id; }
     public String getSessionRestaurantId() { return this.session_restaurant_id; }
     public String getSessionCartId() {return this.session_cart_id; }
     public String getSessionBillId() {return this.session_bill_id; }
     public String getSessionStartTime() { return this.session_start_time;}
-    public Dine_In_Session(String session_user_email, String session_restaurant_id) throws Exception {
+    public Dine_In_Session(String session_user_email, String session_restaurant_id,String session_table_id) throws Exception {
         this.session_user_email = session_user_email;
         this.session_restaurant_id = session_restaurant_id;
-
+        this.session_table_id = session_table_id;
         try{
             Connection con = dbConnection.getDb();
-            String sql = "INSERT INTO session (session_user_id,session_restaurant_id,session_status,session_start_time) VALUES (?,?,'OPEN',?)";
+            String sql = "INSERT INTO session (session_user_id,session_restaurant_id,session_status,session_start_time,session_table_id) VALUES (?,?,'OPEN',?,?)";
             PreparedStatement pt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pt.setString(1,this.session_user_email);
             pt.setString(2,this.session_restaurant_id);
             pt.setString(3, JDateTime.getCurrentDateTime());
+            pt.setString(4,this.session_table_id);
 
             int affedctedRows = pt.executeUpdate();
             if(affedctedRows == 0 ){

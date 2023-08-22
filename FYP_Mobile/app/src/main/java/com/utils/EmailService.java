@@ -24,8 +24,8 @@ import javax.mail.internet.MimeMessage;
 public class EmailService {
 
     public void sendEmail(String receiver, String title, String content) throws GeneralSecurityException, IOException {
-        final String username = "apikey";
-        final String password = "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";
+        final String username = "";
+        final String password = "";
 
         // Setup SMTP server properties
         Properties props = new Properties();

@@ -1,5 +1,6 @@
 package com.reporting.model;
 
+import com.utils.JDateTime;
 import com.utils.dbConnection;
 
 import java.sql.Connection;
@@ -25,11 +26,12 @@ public class Feedback {
 
     public void add_feedback(){
         try{
-            String sql = "INSERT INTO feedback (feedback_content, feedback_session_id) VALUES (?,?)";
+            String sql = "INSERT INTO feedback (feedback_content, feedback_session_id,feedback_date_time) VALUES (?,?,?)";
             Connection con = dbConnection.getDb();
             PreparedStatement pt = con.prepareStatement(sql);
             pt.setString(1, this.feedback_content);
             pt.setString(2, this.feedback_session_id);
+            pt.setString(3, JDateTime.getCurrentDateTime());
             pt.executeUpdate();
 
         } catch (Exception e){

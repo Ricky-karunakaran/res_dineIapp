@@ -73,8 +73,11 @@ public class StripPaymentActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+//                paymentController.PaymentFlow();
                 if(paymentController.isSetup()){
                     paymentController.PaymentFlow();
+                } else {
+                    Toast.makeText(StripPaymentActivity.this,"Seting up payment gateway",Toast.LENGTH_SHORT).show();
                 }
 
             }

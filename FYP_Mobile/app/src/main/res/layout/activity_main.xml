@@ -84,14 +84,15 @@
         </FrameLayout>
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="240dp"
-            android:layout_height="294dp"
+            android:id="@+id/imageView2"
+            android:layout_width="173dp"
+            android:layout_height="177dp"
             app:layout_constraintBottom_toTopOf="@+id/frameLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:srcCompat="@mipmap/front" />
+            app:srcCompat="@mipmap/foodverse" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

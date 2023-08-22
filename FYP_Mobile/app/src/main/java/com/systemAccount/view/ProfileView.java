@@ -3,6 +3,7 @@ package com.systemAccount.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.customerAuthentication.view.CheckInView;
 import com.customerAuthentication.view.HomeView;
+import com.example.fyp_mobile.MainActivity;
 import com.example.fyp_mobile.R;
 import com.reporting.model.Consumption;
 import com.reporting.model.HistoryVisit;
@@ -60,6 +62,15 @@ public class ProfileView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileView.this, ConsumptionView.class);
+                startActivity(intent);
+            }
+        });
+
+        Button profile_button = (Button) findViewById(R.id.profile_logout_button);
+        profile_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(ProfileView.this, MainActivity.class);
                 startActivity(intent);
             }
         });

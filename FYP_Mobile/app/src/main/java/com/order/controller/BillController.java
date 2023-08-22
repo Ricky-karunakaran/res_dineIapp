@@ -29,9 +29,11 @@ public class BillController {
         ArrayList<BillItem> bill_list= bill.getBillItems();
 
         DecimalFormat df = new DecimalFormat("#0.00");
+        double total_price = 0;
         for(int i=0;i<bill_list.size();i++){
 
             BillItem bill_item = bill_list.get(i);
+            total_price+=bill_item.getBillItemUnitPrice()*bill_item.getBillItemQuantity();
             String bill_total_item_price = df.format(bill_item.getBillItemUnitPrice()*bill_item.getBillItemQuantity());
 
             ((StripPaymentActivity) currentView).add_bill_row(
@@ -45,7 +47,7 @@ public class BillController {
         ((StripPaymentActivity) currentView).add_bill_row(
                 "Total",
                 "",
-                "RM"+df.format(bill.getBillAmount()),
+                "RM"+df.format(total_price),
                 true
         );
     }

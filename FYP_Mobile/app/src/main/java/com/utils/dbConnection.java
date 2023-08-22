@@ -8,14 +8,11 @@ import java.sql.SQLException;
 
 public final class dbConnection {
     private static String driver = "com.mysql.jdbc.Driver";
-    private static String dbName = "fyp_res";
-//    private static String hostName = "db4free.net:3306";
-//    private static String hostPort = "";//"3306";
-//    private static String urlParameter = "useSSL=false";
-//    private static String user = "fyp_res_ricky";
-//    private static String password = "rootFYPRes-22";
-//
-    private static String hostName = "10.67.150.56";
+
+
+    private static String dbName = "fyp_alpha";
+    private static String hostName ="192.168.0.104";
+//    private static String hostName = "192.168.118.232";
     private static String urlParameter ="";
     private static String user = "ricky";
     private static String password = "1234";

@@ -30,7 +30,7 @@ public class CheckInView extends AppCompatActivity {
     public void checkIn(View v){
         EditText restaurant_code = (EditText)  findViewById(R.id.check_in_restaurant_code);
         EditText table_no = (EditText) findViewById(R.id.check_in_restaurant_table_no);
-        controller.checkIn(restaurant_code.getText().toString());
+        controller.checkIn(restaurant_code.getText().toString(), table_no.getText().toString());
 
     }
 

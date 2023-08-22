@@ -18,9 +18,7 @@ import com.utils.Session;
 import com.utils.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
-//    private static PayPalConfiguration config = new PayPalConfiguration()
-//            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
-//            .clientId(paypalConfig.PAYPAL_CLIENT_ID);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

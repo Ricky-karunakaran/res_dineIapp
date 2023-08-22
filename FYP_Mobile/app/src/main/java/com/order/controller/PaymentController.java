@@ -11,7 +11,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.customerAuthentication.model.Check_In_Request;
+import com.customerAuthentication.model.Dine_In_Session;
 import com.order.model.Bill;
+import com.order.model.BillItem;
 import com.order.view.StripPaymentActivity;
 import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.paymentsheet.PaymentSheet;
@@ -26,14 +29,15 @@ import org.json.JSONObject;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PaymentController extends ControllerBase {
     private StripPaymentActivity currentView;
 
-    private String SECRET_KEY = "sk_test_51NFBp8CbDYea54mdoBPPH9hWbR8J2hv5LP1vn7CAqv0pgiRF1LFaY4qi2s6xarrzg6cPpq2BgBaUS6QJgqlnKnzg001CyxEN6a";
-    private String PUBLISH_KEY="pk_test_51NFBp8CbDYea54mdxYLFmByfFGgS3ecEqgwAucRAYI152QbxVBfdBKVVjgvKtfwC04gvxWJNQpMMGXNz2PiczRd700BYYNF1WQ";
+    private String SECRET_KEY = "";
+    private String PUBLISH_KEY="";
     private PaymentSheet paymentSheet;
 
     private String customerID;
@@ -47,6 +51,7 @@ public class PaymentController extends ControllerBase {
 
 
     public void initiatePayment(){
+        System.out.println("Hello");
         PaymentConfiguration.init(currentView.getThis(),this.PUBLISH_KEY);
         paymentSheet = new PaymentSheet(currentView.getThis(),paymentSheetResult -> {
             if(onPaymentResult(paymentSheetResult)){
@@ -54,6 +59,7 @@ public class PaymentController extends ControllerBase {
             }
 
         });
+        System.out.println("Hello");
         this.createCustomer();
     }
 
@@ -70,14 +76,24 @@ public class PaymentController extends ControllerBase {
             bill.update_status();
 
             User user = (User) session.getAttributes("user");
+            Dine_In_Session dine_in_session = new Dine_In_Session();
+            dine_in_session.setSessionId((String)session.getAttributes("session_id"));
+            dine_in_session.setSessionStatus("CLOSED");
+            Check_In_Request check_in_request = new Check_In_Request();
+            check_in_request.setCheckInUserEmail(user.getUserEmail());
             try {
                 user.update_active_session(null);
+                dine_in_session.update_session_status_by_id();
+                check_in_request.close_check_in_request();
 
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
+            } catch (Exception e){
+
             }
+
             return true;
         }
         return false;
@@ -85,6 +101,9 @@ public class PaymentController extends ControllerBase {
     }
 
     public void PaymentFlow() {
+        System.out.println(ClientSecret);
+        System.out.println(customerID);
+        System.out.println(EphericalKey);
         paymentSheet.presentWithPaymentIntent(
                 ClientSecret,
                 new PaymentSheet.Configuration(
@@ -101,7 +120,7 @@ public class PaymentController extends ControllerBase {
 
     public void createCustomer(){
         // create customer
-
+        System.out.println("Hello");
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 "https://api.stripe.com/v1/customers",
@@ -121,12 +140,14 @@ public class PaymentController extends ControllerBase {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        System.out.println("Error");
+                        System.out.println(error.getMessage());
                     }
                 }
         ){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
+                System.out.println("Hello");
                 Map<String, String> header = new HashMap<>();
                 header.put("Authorization","Bearer "+SECRET_KEY);
                 return header;
@@ -135,6 +156,7 @@ public class PaymentController extends ControllerBase {
 
         RequestQueue requestQueue = Volley.newRequestQueue(currentView.getThis());
         requestQueue.add(stringRequest);
+        System.out.println("End Get Customer");
     }
 
     public void getEphericalKey(String customerID) {
@@ -256,6 +278,12 @@ public class PaymentController extends ControllerBase {
         Bill bill = new Bill();
         bill.setBillId(bill_id);
         bill.read_bill_by_id();
-        return bill.getBillAmount();
+        ArrayList<BillItem> bill_list= bill.getBillItems();
+        double total_price = 0;
+        for(int i=0;i<bill_list.size();i++){
+            BillItem bill_item = bill_list.get(i);
+            total_price+=bill_item.getBillItemUnitPrice()*bill_item.getBillItemQuantity();
+        }
+        return total_price;
     }
 }

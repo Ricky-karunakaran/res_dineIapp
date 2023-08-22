@@ -1,5 +1,6 @@
 package com.order.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.FocusFinder;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.customerAuthentication.controller.CheckInController;
@@ -17,6 +19,7 @@ import com.customerAuthentication.view.HomeView;
 import com.example.fyp_mobile.R;
 import com.order.controller.CartController;
 import com.order.controller.MenuController;
+import com.order.controller.SessionController;
 import com.systemAccount.view.ProfileView;
 import com.utils.Dialog;
 
@@ -24,6 +27,7 @@ public class SessionView  extends AppCompatActivity {
     private MenuController controller ;
     private CartController cart_controller;
     private CheckOutController check_out_controler;
+    private SessionController sessionController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,6 +38,8 @@ public class SessionView  extends AppCompatActivity {
         this.cart_controller.setView(this);
         this.check_out_controler = new CheckOutController();
         this.check_out_controler.setView(this);
+        this.sessionController = new SessionController();
+        this.sessionController.setView(this);
         setContentView(R.layout.activity_session);
         this.setupRoute();
         this.initializeSessionRestaurant();
@@ -55,8 +61,23 @@ public class SessionView  extends AppCompatActivity {
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SessionView.this, CartView.class);
-                startActivity(intent);
+                if(sessionController.checkSessionStatus()){
+                    Intent intent = new Intent(SessionView.this, CartView.class);
+                    startActivity(intent);
+                } else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SessionView.this);
+                    builder.setTitle("No Active Session");
+                    builder.setMessage("No active session with this restaurant");
+                    builder.setCancelable(false); // set whether the dialog is cancelable or not
+                    builder.setPositiveButton("Back To Home", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent(SessionView.this, HomeView.class);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.show();
+                }
+
             }
         });
 
@@ -64,8 +85,23 @@ public class SessionView  extends AppCompatActivity {
         waiter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(SessionView.this, WaiterView.class);
-                startActivity(intent);
+                if(sessionController.checkSessionStatus()){
+                    Intent intent = new Intent(SessionView.this, WaiterView.class);
+                    startActivity(intent);
+                } else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SessionView.this);
+                    builder.setTitle("No Active Session");
+                    builder.setMessage("No active session with this restaurant");
+                    builder.setCancelable(false); // set whether the dialog is cancelable or not
+                    builder.setPositiveButton("Back To Home", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent(SessionView.this, HomeView.class);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.show();
+                }
+
             }
         });
 
@@ -73,8 +109,22 @@ public class SessionView  extends AppCompatActivity {
         payment.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(SessionView.this, StripPaymentActivity.class);
-                startActivity(intent);
+                if(sessionController.checkSessionStatus()){
+                    Intent intent = new Intent(SessionView.this, StripPaymentActivity.class);
+                    startActivity(intent);
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SessionView.this);
+                    builder.setTitle("No Active Session");
+                    builder.setMessage("No active session with this restaurant");
+                    builder.setCancelable(false); // set whether the dialog is cancelable or not
+                    builder.setPositiveButton("Back To Home", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent(SessionView.this, HomeView.class);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.show();
+                }
             }
         });
 

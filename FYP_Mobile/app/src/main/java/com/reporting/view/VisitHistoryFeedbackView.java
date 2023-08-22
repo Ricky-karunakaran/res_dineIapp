@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fyp_mobile.R;
 import com.reporting.controller.HistoryVisitController;
+import com.systemAccount.view.ProfileView;
 import com.utils.CustomException;
 import com.utils.Session;
 import com.utils.SessionManager;
@@ -89,6 +90,16 @@ public class VisitHistoryFeedbackView extends AppCompatActivity {
 
         Intent intent = new Intent(this, VisitHistoryView.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, VisitHistoryView.class);
+        startActivity(intent);
+    }
+
+    public void backVisitView(View v){
+        this.onBackPressed();
     }
 
 

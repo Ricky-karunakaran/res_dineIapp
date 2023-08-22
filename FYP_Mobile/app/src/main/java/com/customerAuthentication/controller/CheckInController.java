@@ -31,7 +31,7 @@ public class CheckInController {
         this.currentView  = v;
     }
 
-    public void checkIn(String restaurant){
+    public void checkIn(String restaurant,String table_no){
         SessionManager sessionManager = SessionManager.getInstance();
         Session session = sessionManager.getSession();
         User user = (User) session.getAttributes("user");
@@ -49,7 +49,7 @@ public class CheckInController {
                     // check restaurant exist
                     Restaurant.find_restaurant(restaurant);
 
-                    Dine_In_Session dine_in_session = new Dine_In_Session(user.getUserEmail(),restaurant);
+                    Dine_In_Session dine_in_session = new Dine_In_Session(user.getUserEmail(),restaurant,table_no);
                     Check_In_Request check_in_request = new Check_In_Request();
                     check_in_request.setCheckInRestaurantId(restaurant);
                     check_in_request.setCheckInUserEmail(user.getUserEmail());
@@ -115,4 +115,6 @@ public class CheckInController {
         }
         return null;
     }
+
+
 }

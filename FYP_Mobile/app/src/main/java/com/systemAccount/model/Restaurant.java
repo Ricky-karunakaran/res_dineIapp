@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Restaurant extends Model implements Account {
+public class Restaurant extends Model {
     private String restaurant_email;
     private String restaurant_name;
     private String restaurant_location;
@@ -38,25 +38,6 @@ public class Restaurant extends Model implements Account {
     public String getOperationHours(){ return this.restaurant_operation_hours; }
 
     public String getRestaurantId() { return this.restaurant_id;}
-    @Override
-    public boolean login(String password) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean register(String password) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void edit_info() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean reset_password(String email, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public static void find_restaurant(String restaurant_id) throws Exception {
         try{
